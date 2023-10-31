@@ -1,0 +1,102 @@
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/*body {
+  background-image: url('images/login.jpg');
+}*/
+
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 2.5rem;
+  align-items: center;
+  text-align: center;
+  height: 90vh;
+  min-height: 500px;
+  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+header {
+  background-color: #568CDD;
+  width: 250px;
+  border-radius: 32px;
+  /*font-family: 'Cabin';*/
+  font-style: normal;
+  font-weight: bold;
+  line-height: 49px;
+  color: #FFFFFF;
+  font-size: 24px;
+}
+
+.login {
+  line-height: 1.5;
+}
+
+input {
+  width: 268px;
+  height: 2.8rem;
+  border-radius: 22px;
+  border: none;
+  padding: 0.5rem;
+  font-size: 1rem;
+  outline: none;
+  /* text-align: center; */
+  background-color: rgba(0, 0, 0, 0);
+  color: #000000;
+  border: 1px solid #8f8e8e;
+}
+
+input:focus {
+  border: 1px solid #585858;
+}
+
+input::placeholder {
+  color: #8f8e8e;
+}
+
+label {
+  font-size: 1.5rem;
+  color: #8f8e8e;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+button {
+  width: 268px;
+  height: 2.5rem;
+  border-radius: 22px;
+  border: none;
+  padding: 0.5rem;
+  font-size: 1.1rem;
+  outline: none;
+  cursor: pointer;
+  color: #fff;
+  background-color: #13B799;
+}
+
+button:hover {
+  background-color: #0e8871;
+}
+
+a {
+  text-decoration: none;
+  color: #000;
+  font-family: inherit;
+}
+
+a:hover {
+  color: #424242;
+}
+
+footer {
+  font-size: 1.2rem;
+}

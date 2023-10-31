@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="usuario.js"></script>
+    <link rel="stylesheet" href="./usuarios.css" />
+  </head>
+
+  <body>
+    <div class="contenido">
+      <div class="datos">
+        <p>Nombre: Gonzales Suyo Franz Reinaldo</p>
+        <p>LAB-9 SIS324 GL-1</p>
+        <p>Navigación Control Usuario</p>
+      </div>
+
+      <header class="header">
+        <button class="button" onclick="armar_tabla_usuarios(lista_usuarios)">
+          Lista Usuarios
+        </button>
+        <button class="button" onclick="mostrar_formUsuario()">
+          Agregar Usuario
+        </button>
+
+        <div class="buscar">
+          <label for="dato">Buscar</label>
+          <input type="text" id="dato" />
+          <button class="button" onclick="buscar_usuario()">Buscar</button>
+        </div>
+      </header>
+      <p id="message"></p>
+
+      <div class="container" id="container"></div>
+    </div>
+
+    <script>
+      var lista_usuarios = controlUsuario.obtenerListaUsuarios();
+
+      var container = document.getElementById("container");
+      container.innerHTML = "";
+
+      function armar_tabla_usuarios(usuarios) {
+        // var container = document.getElementById("container");
+
+        let html =
+          `<div id="tabla_usuarios">` +
+          `<table>` +
+          `<thead>
+            <tr>
+              <th>ID</th>
+              <th>Nombre</th>
+              <th>Cuenta</th>
+              <th>Clave</th>
+              <th>Email</th>
+              <th>Rol</th>
+              <th>Operaciones</th>
+            </tr>
+          </thead>
+          <tbody>`;
+        usuarios.forEach(function (usuario) {
+          html += `<tr>
+                <td>${usuario.id}</td>
+                <td>${usuario.nombre}</td>
+                <td>${usuario.cuenta}</td>
+                <td>${usuario.clave}</td>
+                <td>${usuario.email}</td>
+                <td>${usuario.rol}</td>
+                <td>
+                  <button data-action="editar" onclick="formEditUsuario(${usuario.id});">Editar</button>
+                  <button data-action="eliminar" onclick="controlUsuario.eliminar_Usuario(${usuario.id}); 
+                  armar_tabla_usuarios(lista_usuarios)">Eliminar</button>
+                  </td>
+              </tr>`;
+        });
+        html += `</tbody>
+        </table>
+      </div>`;
+        container.innerHTML = html;
+      }
+
+      function registrar_NuevoUsuario() {
+        event.preventDefault();
+
+        var nv_id = lista_usuarios.length - 1;
+        // console.log(id_user);
+
+        // const id = document.getElementById("id").value;
+        const nombre = document.getElementById("nombre").value;
+        const cuenta = document.getElementById("cuenta").value;
+        const clave = document.getElementById("password").value;
+        const email = document.getElementById("email").value;
+        const rol = document.getElementById("rol").value;
+
+        const usuario = new Usuario(
+          nv_id + 1,
+          nombre,
+          cuenta,
+          clave,
+          email,
+          rol
+        );
+
+        // nv_id++;
+        console.log(usuario);
+
+        controlUsuario.adicionar_Usuario(usuario);
+        armar_tabla_usuarios(controlUsuario.obtenerListaUsuarios());
+
+        document.getElementById("formulario").reset();
+      }
+
+      function mostrar_formUsuario() {
+        // var container = document.getElementById('container');
+        var html_formUsuario = `
+        <div class="registro-container">
+        <h2>Registro de Usuario</h2>
+        <form id="formulario">
+          <label for="nombre">Nombre:</label>
+          <input type="text" id="nombre" name="nombre" required />
+
+          <label for="cuenta">Cuenta:</label>
+          <input type="text" id="cuenta" name="cuenta" required />
+
+          <label for="password">Contraseña:</label>
+          <input type="password" id="password" name="password" required />
+
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required />
+
+          <label for="rol">Rol:</label>
+          <select id="rol" name="rol" required>
+            <option value="Admin">Admin</option>
+            <option value="Usuario">Usuario</option>
+          </select>
+
+          <button type="submit" class="registro-button" onclick="registrar_NuevoUsuario();">Registrar</button>
+        </form>
+        </div>`;
+
+        // document.getElementById("formulario").addEventListener("submit", registrar_NuevoUsuario);
+        container.innerHTML = html_formUsuario;
+      }
+
+      function buscar_usuario() {
+        var dato_buscar = document.getElementById("dato").value;
+        var message = document.getElementById("message");
+        // console.log(dato_buscar);
+        var usuario_encontrado = false;
+
+        lista_usuarios.forEach((usuario) => {
+          var id_user = usuario.id.toString();
+
+          switch (dato_buscar) {
+            case id_user:
+            case usuario.nombre:
+            case usuario.cuenta:
+            case usuario.email:
+            case usuario.clave:
+            case usuario.rol:
+              armar_tabla_usuarios([usuario]);
+              usuario_encontrado = true;
+              break;
+          }
+
+          if (usuario_encontrado == true) {
+            message.innerHTML = "";
+          } else {
+            message.innerHTML = "No se encontró ningun usuario con el dato introducido";
+            container.innerHTML = "";
+          }
+        });
+      }
+
+      function formEditUsuario(id_user) {
+        var listaUsuarios = controlUsuario.obtenerListaUsuarios();
+        var usuario = listaUsuarios.find((user) => user.id == id_user);
+
+        var rolUser = usuario.rol;
+
+        if (rolUser == "Admin") {
+            rolUser = "Usuario";
+        } else {
+            rolUser = "Admin";
+        }
+
+        var html_formUsuario = `
+        <div class="registro-container">
+        <h2>Registro de Usuario</h2>
+        <div id="formulario">
+          <label for="nombre">Nombre:</label>
+          <input type="text" id="nombre" value="${usuario.nombre}" name="nombre" required />
+
+          <label for="cuenta">Cuenta:</label>
+          <input type="text" id="cuenta" value="${usuario.cuenta}" name="cuenta" required />
+
+          <label for="password">Contraseña:</label>
+          <input type="password" id="password" value="${usuario.clave}" name="password" required />
+
+          <label for="email">Email:</label>
+          <input type="email" id="email" value="${usuario.email}" name="email" required />
+
+          <label for="rol">Rol:</label>
+          <select id="rol" name="rol" required>
+            <option value="${usuario.rol}">${usuario.rol}</option>
+            <option value="${rolUser}">${rolUser}</option>
+          </select>
+
+          <button class="registro-button" id="btn_editar" onclick="editarUsuario(${usuario.id})">Actualizar</button> 
+        </div>
+        </div>`;
+
+        container.innerHTML = html_formUsuario;
+      }
+      function editarUsuario(idUser) {
+        // console.log('idUser');
+        var listaUsuarios = controlUsuario.obtenerListaUsuarios();
+
+        var nombre = document.getElementById("nombre").value;
+        var cuenta = document.getElementById("cuenta").value;
+        var clave = document.getElementById("password").value;
+        var email = document.getElementById("email").value;
+        var rol = document.getElementById("rol").value;
+
+        console.log(nombre);
+        var usuarioEncontrado = listaUsuarios.find((user) => user.id == idUser);
+        // console.log(usuarioEncontrado);
+
+        usuarioEncontrado.nombre = nombre;
+        usuarioEncontrado.cuenta = cuenta;
+        usuarioEncontrado.clave = clave;
+        usuarioEncontrado.email = email;
+        usuarioEncontrado.rol = rol;
+
+        armar_tabla_usuarios(listaUsuarios);
+      }
+    </script>
+  </body>
+</html>

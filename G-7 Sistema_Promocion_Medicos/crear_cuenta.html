@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/crear_cuenta.css" />
+    <title>Document</title>
+</head>
+<body>
+    <nav>
+        <div class="logo items-nav">
+          <!-- <img src="icons/house-solid.svg" width="80px" height="50px"/> -->
+          <img src="icons/house-solid.svg" alt="House icon" width="80px" height="50px"/>
+        </div>
+        <div class="items-nav medio ">
+          <div><img src="icons/truck-medical-solid.svg" alt="" width="80px" height="50px" /></div>
+          <div>MEDI-CONECT</div>
+        </div>
+        <div class="items-nav login">
+          <h3 class="item-login" onclick="location.href='inicio.html'">Volver</h3>
+        </div>
+      </nav>
+      <main>
+        <form action="">
+            <label for="nombre">
+                <input type="text" name="nombre" id="nombre" placeholder="Su nombre">
+            </label>
+            <br><br>
+            <label for="apellido">
+                <input type="text" name="apellido" id="apellido" placeholder="Telefono de contacto (+codigo de pais)">
+            </label>
+            <br><br>
+            <label for="correo">
+                <input type="email" name="correo" id="correo" placeholder="Email">
+            </label>
+            <br><br>
+            <label for="mensaje">:
+                <textarea name="mensaje" id="mensaje" cols="47" rows="10"></textarea>
+            </label>
+            <!-- <label for="mensaje">Mensaje:</label>
+            <textarea name="mensaje" id="mensaje" cols="47" rows="10"></textarea> -->
+            <br><br>
+            <hr>
+            <br>
+            <h3>Datos de su clinica</h3>
+            <br>
+            <label for="nombre-clinica">
+                <input type="text" name="nombre-clinica" id="nombre-clinica" placeholder="Nombre de su clinica">
+            </label>
+            <br><br>
+            <label for="ciudad">
+                <select name="ciudad" id="ciudad" >
+                    <option value="">Indique su tipo de clinica</option>
+                    <option value="cbba">Cochabamba</option>
+                    <option value="scz">Santa Cruz</option>
+                    <option value="lpz">La Paz</option>
+                    <option value="or">Oruro</option>
+                    <option value="pt">Potosi</option>
+                    <option value="tj">Tarija</option>
+                    <option value="bn">Beni</option>
+                    <option value="pn">Pando</option>
+                </select>
+            </label>
+            <br><br>
+            <label for="ciudad">
+                <select name="ciudad" id="ciudad">
+                    <option value="cbba">Cochabamba</option>
+                    <option value="scz">Santa Cruz</option>
+                    <option value="lpz">La Paz</option>
+                    <option value="or">Oruro</option>
+                    <option value="pt">Potosi</option>
+                    <option value="tj">Tarija</option>
+                    <option value="bn">Beni</option>
+                    <option value="pn">Pando</option>
+                </select>
+            </label>
+            <br><br>
+            <hr>
+            <h3>Campos obligatorios</h3> 
+        </form>
+        <div class="buttons">
+            <div class="boton">
+                <button class="guardar"><img src="icons/floppy-disk-solid.svg" alt="" width="50px" height="20px">Guardar</button>
+            </div>
+            <div class="boton" onclick="location.href='inicio.html'">
+                <button class="cancelar"><img src="icons/arrow-left-long-solid.svg" alt="" width="50px" height="20px">Cancelar</button>
+            </div>
+        </div>
+      </main>
+</body>
+</html>
