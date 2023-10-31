@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../styles/medicos.css">
+  <title>Document</title>
+  <script src="../class/medico.js"></script>
+</head>
+
+<body>
+    <nav>
+        <div class="logo items-nav">
+          <!-- <img src="icons/house-solid.svg" width="80px" height="50px"/> -->
+          <img src="../icons/house-solid.svg" alt="House icon" width="80px" height="50px"/>
+        </div>
+        <div class="items-nav medio ">
+          <div><img src="../icons/truck-medical-solid.svg" alt="" width="80px" height="50px" /></div>
+          <div>MEDI-CONECT</div>
+        </div>
+        <div class="items-nav login">
+          <h3 class="item-login" onclick="location.href='inicio.html'">Volver</h3>
+        </div>
+    </nav>
+
+  <br> <h2 class="textCenter">Medicos</h2> <br>
+  <div class="container">
+  <div id="botones" >
+    <button onclick="mostrarLista(Ctr_user.listaMedico)">Lista Medicos</button>
+    <button onclick="añadirMedico()">Añadir Medico</button>
+    <button onclick="buscar()">Buscar</button>
+    <input type="text" id="buscar" placeholder="Datos del Medico">
+  </div>
+    <div id="tabla_medicos"></div>
+
+    <form id="formulario"></form>
+  </div>
+ 
+  <script>
+    let Ctr_medico = new ControlMedico();
+    let lista_medicos = ControlMedico.obtenerListaMedicos();
+
+    lista_medicos.forEach((medico) => Ctr_user.adicionar_Medico(medico));
+    
+    function armar_tabla_medicos(medicos) {
+      const tablaMedicos = document.getElementById("tabla_medicos");
+      var html =
+        `<table > 
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>Nombre</th>
+              <th>Cuenta</th>
+              <th>Clave</th>
+              <th>Email</th>
+              <th>Rol</th>
+              <th>Operaciones</th>
+            </tr>
+          </thead>
+          <tbody>`;
+      medicos.forEach(function (medico) {
+        html += `<tr>
+                <td>${medico.id}</td>
+                <td>${medico.nombre}</td>
+                <td>${medico.cuenta}</td>
+                <td>${medico.clave}</td>
+                <td>${medico.email}</td>
+                <td>${medico.rol}</td>
+                <td id="operaciones">
+                  <button name="modificar" value="${medico.id}" onclick="modificar(${medico.id})">Modificar</button>
+                  <button name="eliminar" value="${medico.id}" onclick="eliminar(${medico.id})" >Eliminar</button>
+                </td>                            
+              </tr>`;
+      });
+      html += `</tbody>
+        </table>`;
+      return html;
+    }
+
+    function mostrarLista(listaMedicos) {
+      document.getElementById("tabla_medicos").innerHTML = armar_tabla_medicos(listaMedicos);
+      document.getElementById("formulario").innerHTML="";    
+      document.getElementById('formulario').style.backgroundColor = "#f0f0f0"
+      document.getElementById('formulario').style.border = "1px solid #f0f0f0"   
+    }
+
+    function añadirMedico() {
+      //limpio la lista
+      document.getElementById("tabla_medicos").innerHTML="";  
+
+      document.getElementById('formulario').innerHTML =
+        `
+        <h2>Registrar nuevo medico</h2>
+        <label for="nombre">Nombre</label>
+        <input type="text" name="nombre">
+        <label for="cuenta">Cuenta</label>
+        <input type="text" name="cuenta">
+        <label for "clave">Clave</label>
+        <input type="text" name="clave">
+        <label for="email">Email</label>
+        <input type="text" name="email">
+        <label for="rol">Rol</label>
+        <select name="rol" id="">
+          <option value="medico">Medico</option>
+          <option value="administrador">Administrador</option>
+        </select>
+        <br>
+        <input type="button" value="Registrar">
+        `
+      document.getElementById('formulario').style.backgroundColor = "#fff"
+      document.getElementById('formulario').style.border = "1px solid #ddd"
+    }
+
+    var formulario = document.getElementById("formulario");
+    var newId = lista_medicos.length;
+
+    formulario.addEventListener("submit", function (event) {
+      event.preventDefault();
+      let nombre = formulario.nombre.value;
+      let cuenta = formulario.cuenta.value;
+      let clave = formulario.clave.value;
+      let email = formulario.email.value;
+      let rol = formulario.rol.value;
+      if (nombre == "" || cuenta == "" || clave == "" || email == "" || rol == "") {
+        alert("Debe llenar todos los campos");
+      } else {
+        
+        newId++;
+        let user = new Medico(newId, nombre, cuenta, clave, email, rol);
+        Ctr_user.adicionar_Medico(user);
+        if (document.getElementById("tabla_medicos").innerHTML == '') {
+          document.getElementById("tabla_medicos").innerHTML = ''
+        } else {
+          mostrarLista(Ctr_user.listaMedico);
+        }
+        formulario.reset();
+      }
+    });
+
+
+    function buscar() {
+      let userBuscar = document.getElementById("buscar").value;
+      Ctr_user.listaMedico.forEach(function (user) {
+        if (user.id == userBuscar || user.nombre == userBuscar || user.cuenta == userBuscar) {
+          let ctrlMedico = new ControlMedico();
+          ctrlMedico.adicionar_Medico(user);
+          mostrarLista(ctrlMedico.listaMedico)
+        }
+      })
+    }
+
+    function eliminar(id) {
+      document.getElementsByName("eliminar").forEach(function (boton) {
+        if (boton.value == id) {
+          Ctr_user.eliminar(id)
+          mostrarLista(Ctr_user.listaMedico)
+        }
+      })
+    }
+
+    let medicoAActualizarId = null;
+
+function modificar(id) {
+  medicoAActualizarId = id;
+  Ctr_user.listaMedico.forEach(function (user) {
+    if (user.id === id) {
+      document.getElementById('formulario').innerHTML = `
+        <h2>Modificar Medico</h2>
+        <label for="nombre">Nombre</label>
+        <input type="text" name="nombre" value="${user.nombre}">
+        <label for="cuenta">Cuenta</label>
+        <input type="text" name="cuenta" value="${user.cuenta}">
+        <label for="clave">Clave</label>
+        <input type="text" name="clave" value="${user.clave}">
+        <label for="email">Email</label>
+        <input type="text" name="email" value="${user.email}">
+        <label for="rol">Rol</label>
+        <select name="rol" id="">
+          <option value="medico">Medico</option>
+          <option value="administrador">Administrador</option>
+        </select>
+        <br>
+        <input type="button" onclick="actualizar()" value="Actualizar">
+      `;
+      document.getElementById('formulario').style.backgroundColor = "#fff";
+      document.getElementById('formulario').style.border = "1px solid #ddd";
+    }
+  });
+}
+
+function actualizar() {
+  if (medicoAActualizarId !== null) {
+    let formulario = document.getElementById("formulario");
+    let nombre = formulario.nombre.value;
+    let cuenta = formulario.cuenta.value;
+    let clave = formulario.clave.value;
+    let email = formulario.email.value;
+    let rol = formulario.rol.value;
+
+    Ctr_user.modificar(medicoAActualizarId-1, nombre, cuenta, clave, email, rol);
+
+    formulario.reset();
+
+    medicoAActualizarId = null;
+    mostrarLista(Ctr_user.listaMedico);
+    
+  }
+}
+  
+  </script>
+ </body>
+
+</html>
