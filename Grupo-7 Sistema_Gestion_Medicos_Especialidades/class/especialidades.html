@@ -23,43 +23,8 @@
           <h3 class="item-login" onclick="location.href='inicio.html'">Volver</h3>
         </div>
     </nav>
-   <h2 class="textCenter">Medicos con sus Especialidades</h2>
 
-  <div id="botones" class="botones">
-    <input type="text" id="buscar" placeholder="Datos del Medico">
-    <button onclick="buscar()">Buscar</button>
-  </div>
   
-
-
-
-
-
-
-
-
-
-
-<div class="card-medico">
-  <div class="perfil">
-    <img src="" alt="">
-  </div>
-  <div class="informacion"></div>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
  
   <script>
     let Ctr_medico = new ControlMedico();
@@ -67,7 +32,7 @@
     let lista_medicos = Ctr_medico.listaMedicos;
     console.console.log(lista_medicos);
     
-
+    
     function armar_tabla_medicos(medicos) {
       const tablaMedicos = document.getElementById("tabla_medicos");
       var html =``;
