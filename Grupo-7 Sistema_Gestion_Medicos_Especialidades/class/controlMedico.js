@@ -1,23 +1,4 @@
 
-class Medico{
-    constructor(id, foto, nombre, apellido, telefono, email, password, descripcion,educacion, direccion, hr_disponible, id_especialidad){
-        this.id = id;
-        this.foto = foto;
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.telefono = telefono;
-        this.email = email;
-        this.password = password;
-        this.descripcion = descripcion;
-        this.educacion = educacion;
-        this.direccion = direccion;
-        this.hr_disponible = hr_disponible;
-        this.id_especialidad = id_especialidad;
-    }
-}
-
-
-
 class ControlMedico{
     constructor(){
         this.listaMedicos = [];
@@ -127,7 +108,3 @@ function listar_medicos(){
 }
 
 listar_medicos();
-
-
-
-

@@ -105,12 +105,20 @@ var Iniciar_secion = () => {
   let usuarioValido = controlUsuario.verificar_Usuario(usuario);
   var listaUsuario = controlUsuario.obtenerListaUsuarios();
 
-  var usuario_ = listaUsuario.find(medico => medico.email == email || medico.clave == clave);
+  var usuario_ = listaUsuario.find(usuario => usuario.email == email || usuario.clave == clave);
   
   if (usuarioValido) {
+
     alert("Bienvenido " + usuario_.nombre);
-    open('inicio.html');
-    // window.open('inicio.html', '_blank');
+      open('./Admin/usuarios.html');
+    // if(usuario_.rol == "admin"){
+    //   alert("Bienvenido " + usuario_.nombre);
+    //   open('./usuarios.html');
+    // // window.open('inicio.html', '_blank');
+    // }else{
+    //   alert("Bienvenido " + usuario_.nombre);
+    //   open('inicio.html');
+    // }
   } else {
     alert("Usuario inválido");
   }
@@ -118,12 +126,12 @@ var Iniciar_secion = () => {
 
 var Listar_Usuarios = function () {
   let usuarios = [
-    [0, "Juan", "Perez", "abc", "juan@gmail.com", "Admin"],
-    [1, "Lucas", "Mendez", "def", "lucas@gmail.com", "Usuario"],
-    [2, "Elena", "Paredes", "ghi", "elena@gmail.com", "Usuario"],
-    [3, "Margarita", "Loaiza", "jkl", "margarita@gmail.com", "Admin"],
-    [4, "Franz Reinaldo", "Gonzales", "frgs", "gonzalesfranz2019@gmail.com", "Admin"],
-    [5, "Pedro", "Perez", "polo", "pedro@gmail.com", "Usuario"],
+    [0, "Juan", "Perez", "abc", "juan@gmail.com", "admin"],
+    [1, "Lucas", "Mendez", "def", "lucas@gmail.com", "usuario"],
+    [2, "Elena", "Paredes", "ghi", "elena@gmail.com", "usuario"],
+    [3, "Margarita", "Loaiza", "jkl", "margarita@gmail.com", "admin"],
+    [4, "Franz Reinaldo", "Gonzales", "frgs", "gonzalesfranz2019@gmail.com", "admin"],
+    [5, "Pedro", "Perez", "polo", "pedro@gmail.com", "usuario"],
   ];
 
   //  var pos = 0;

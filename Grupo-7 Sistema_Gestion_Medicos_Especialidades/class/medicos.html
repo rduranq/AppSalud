@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="../styles/medicos.css" />
     <title>Document</title>
     <script src="../class/medico.js"></script>
+    <!-- <script src="../class/controlMedico.js"></script> -->
     <script src="../class/especialidad.js"></script>
   </head>
 
@@ -32,6 +33,7 @@
       </div>
       <div class="items-nav login">
         <h3 class="item-login" onclick="location.href='inicio.html'">Volver</h3>
+
       </div>
     </nav>
 
@@ -39,12 +41,12 @@
 
 
     <div id="container-buscar" class="container-buscar">
-      <button onclick="card_medicos(lista_Medicos, lista_Especialidad);">Lista de Medicos</button>
+      <!-- <button onclick="card_medicos(lista_Medicos, lista_Especialidad);">Lista de Medicos</button> -->
        
       <div class="buscar">
         <div class="option-buscar">
           <input type="text" id="dato" placeholder="Datos del Medico" />
-          <select name="especialidad"  id="especialidad" title="Choose an option" onchange="buscar_medico(lista_Medicos, lista_Especialidad)"></select>
+          <select name="especialidad"  id="especialidad" title="Choose an option" onchange="buscar()"></select>
         </div>
         <button onclick="buscar_medico(lista_Medicos, lista_Especialidad);">Buscar</button>
       </div>
@@ -130,33 +132,90 @@
         });
         container.innerHTML = html;
       }
+
+
+      card_medicos(lista_Medicos, lista_Especialidad);
+
+
+
+
+
+
+
+
+      
+      //  function buscar(lista_Medicos, lista_Especialidad){
+      //   var message = document.getElementById("message");
+
+      //   var select = document.getElementById("especialidad").value;
+      //   console.log("seleccionaste "+select); 
+
+      //   var listMedico = [];
+      //   lista_Medicos.forEach((medico) => {
+
+      //     let nombre_especialidad = '';
+      //     let seleccionado = '';
+      //     // var listMedico = [];
+      //     if(medico.id_especialidad == select){
+      //         listMedico.push(medico);
+      //         // seleccionado = especialidad.nombreEsp;
+      //       }
+      //     lista_Especialidad.forEach(especialidad =>{
+      //       // var listMedico = [];
+      //       seleccionado = especialidad.nombreEsp;
+
+      //       if (especialidad.id_espc == medico.id_especialidad) {
+      //         nombre_especialidad = especialidad.nombreEsp;
+      //       }
+      //     })
+    
+      //     if(seleccionado){
+      //         switch (seleccionado) {
+      //         case nombre_especialidad:
+      //             card_medicos(listMedico, lista_Especialidad);
+      //           break;
+      //       }
+      //     }
+      
+      // });
+      //  }
+
+
+
+
+       function buscar(){
+        var id_especialidad = document.getElementById("especialidad").value;
+
+        let newListaMedicos = [];
+        let newListaEspecialidad = [];
+        newListaEspecialidad.push(id_especialidad);
+
+        lista_Medicos.forEach(function(medico){
+          if(medico.id_especialidad==id_especialidad){
+            newListaMedicos.push(medico);
+          }
+        })
+       card_medicos(newListaMedicos, newListaEspecialidad);
+      }
+
+        
       
       function buscar_medico(listaMedicos, listaEspecialidad) {
 
         var dato_buscar = document.getElementById("dato").value;
         var message = document.getElementById("message");
 
-        var select = document.getElementById("especialidad").value;
-        console.log("seleccionaste "+select);
-       
-          // const option = select.options[select.selectedIndex];
-          // // Leer su value
-          // const value = option.value;
-          // console.log(value);
-
 
         // console.log(dato_buscar);
         var medico_encontrado = false;
 
+        // var listMedico = [];
         listaMedicos.forEach((medico) => {
           var id_medico = medico.id.toString();
 
           let nombre_especialidad = '';
-          let seleccionado = '';
+         
           listaEspecialidad.forEach(especialidad =>{
-            if(especialidad.id_espc == select){
-              seleccionado = especialidad.nombreEsp;
-            }
 
             if (especialidad.id_espc == medico.id_especialidad) {
               nombre_especialidad = especialidad.nombreEsp;
@@ -174,15 +233,6 @@
                 card_medicos([medico], listaEspecialidad);
                 medico_encontrado = true;
                 break;
-            }
-          }else{
-            if(seleccionado){
-                switch (seleccionado) {
-                case nombre_especialidad:
-                  card_medicos([medico], listaEspecialidad);
-                  medico_encontrado = true;
-                  break;
-              }
             }
           }
 
