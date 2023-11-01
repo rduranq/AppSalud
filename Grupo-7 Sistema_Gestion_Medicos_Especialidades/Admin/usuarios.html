@@ -14,23 +14,21 @@
         <p>ADMINISTRADOR</p>
       </div>
 
-      <header class="header">
-        <button class="button" onclick="armar_tabla_usuarios(lista_usuarios)">
-          Lista Usuarios
+      <header class="header" id="header">
+        <button class="button" onclick="gestionUsuario()">
+          Gestion Usuario
         </button>
         <button class="button" onclick="mostrar_formUsuario()">
-          Agregar Usuario
+          Gestion Medicos
         </button>
 
-        <div class="buscar">
-          <label for="dato">Buscar</label>
-          <input type="text" id="dato" />
-          <button class="button" onclick="buscar_usuario()">Buscar</button>
-        </div>
+        <button class="button" onclick="mostrar_formUsuario()">
+          Gestion Especialidad
+        </button>
+       
       </header>
-      <p id="message"></p>
 
-      
+
       <div class="container" id="container"></div>
     </div>
 
@@ -39,6 +37,34 @@
 
       var container = document.getElementById("container");
       container.innerHTML = "";
+
+
+
+      function gestionUsuario(){
+
+        var header = document.getElementById("header");
+
+        var html = `
+        <header class="header">
+        <button class="button" onclick="armar_tabla_usuarios(lista_usuarios)">
+          Lista Usuarios
+        </button>
+        <button class="button" onclick="mostrar_formUsuario()">
+          Agregar Usuario
+        </button>
+
+        <div class="buscar>
+          <label for="dato">Buscar</label>
+          <input type="text" id="dato" />
+          <button class="button" onclick="buscar_usuario()">Buscar</button>
+        </div>
+        <p id="message"></p>
+      </header>
+        `;
+
+        header.innerHTML = "";
+        container.innerHTML = html;
+      }
 
       function armar_tabla_usuarios(usuarios) {
         // var container = document.getElementById("container");
