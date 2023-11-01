@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestionar pacientes</title>
+    <link rel="stylesheet" href="estilo.css">
+</head>
+
+<body>
+    <div class="todo">
+        <div class="header">
+            <div ><button style="background-color: rgb(233, 233, 102);" onclick="armarTablaPacientes()">Lista Pacientes</button></div>
+            <div><button style="background-color: rgb(233, 233, 102);" onclick="añadirPaciente()">Añadir Paciente</button></div>
+            <div><button style="background-color: rgb(233, 233, 102);" onclick="buscar()">Buscar</button><input type="text" id="buscar"></div>
+        </div>
+        <br>
+        <div class="content" >
+            <h2>Listado de Pacientes</h2>
+            <table id="tablaPaciente" style="background-color: rgb(236, 236, 153);"></table>
+        </div>
+        <div class="frouler"></div>
+    </div><br>
+    <div style=" background-color: rgb(31, 124, 124);" id="formulario"></div>
+    <div style=" background-color: rgb(31, 124, 124);" id="formModificar"></div>
+
+    <script src="Paciente.js"></script>
+    <script>
+
+        let ctrolPaciente = new controlPaciente();
+        ctrolPaciente.obtenerListaPacientes();
+
+        consolE.log(ctrolPaciente.obtenerListaPacientes());
+
+        function limpiarTablas() {
+            let tablaPaciente = document.getElementById("tablaPaciente");
+        }
+
+        function armarTablaPacientes() {
+            var listaPaciente = ctrolPaciente.listaPacientes;
+            mostrarPaciente(listaPaciente);
+        }
+
+        function mostrarPaciente(pacientes) {
+            var tablaPaciente = document.getElementById("tablaPaciente");
+            var html = `
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Fecha de Nacimiento</th>
+                    <th>Sexo</th>
+                    <th>Teléfono</th>
+                    <th>Tratamiento</th>
+                    <th>Operaciones</th>
+                </tr>`;
+            pacientes.forEach(function (paciente) {
+                html += `
+                <tr>
+                    <td>${paciente.id}</td>
+                    <td>${paciente.nombre}</td>
+                    <td>${paciente.apellido}</td>
+                    <td>${paciente.fecha_nacimiento}</td>
+                    <td>${paciente.sexo}</td>
+                    <td>${paciente.telefono}</td>
+                    <td>${paciente.tratamiento}</td>
+                    <td>
+                        <button style="background-color: rgb(238, 73, 73);" onclick="eliminarPaciente(${paciente.id})">Eliminar</button>
+                        <button style="background-color: rgb(104, 104, 247);"onclick="modificarPaciente(${paciente.id},'${paciente.nombre}','${paciente.apellido}','${paciente.fecha_nacimiento}','${paciente.sexo}','${paciente.telefono}','${paciente.tratamiento}')">Modificar</button>
+                    </td>
+                </tr>`;
+            });
+            tablaPaciente.innerHTML = html;
+        }
+
+        function eliminarPaciente(id) {
+            ctrolPaciente.eliminarPaciente(id);
+            armarTablaPacientes();
+        }
+
+        function modificarPaciente(id, nombre, apellido, fecha_nacimiento, sexo, telefono, tratamiento) {
+            const paciente = {
+                id: id,
+                nombre: nombre,
+                apellido: apellido,
+                fecha_nacimiento: fecha_nacimiento,
+                sexo: sexo,
+                telefono: telefono,
+                tratamiento: tratamiento
+            };
+            console.log(paciente);
+            const formModificar = document.getElementById("formModificar");
+            let html = `
+            <strong>Modificar datos</strong><br> 
+            <label for="nombre">Nombre</label><br> 
+            <input type="text" id="nombre" name="nombre" value="${paciente.nombre}" required><br>
+            <label for="apellido">Apellido</label><br>
+            <input type="text" id="apellido" name="apellido" value="${paciente.apellido}" required><br>
+            <label for="fecha_nacimiento">Fecha Nacimiento</label><br>
+            <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" value="${paciente.fecha_nacimiento}" required><br>
+            <label for="sexo">Sexo</label><br>
+            <select id="sexo" name="sexo" required>
+            <option value="M" ${paciente.sexo == 'M' ? 'selected' : ''}>M</option>
+            <option value="F" ${paciente.sexo == 'F' ? 'selected' : ''}>F</option>
+            </select><br>
+            <label for="telefono">Telefono</label><br>
+            <input type="number" id="telefono" name="telefono" value="${paciente.telefono}" required><br><br>
+            <label for="tratamiento">Tratamiento</label><br>
+            <input type="text" id="tratamiento" name="tratamiento" value="${paciente.tratamiento}" required><br><br>
+            <button onclick="modificar(${paciente.id})">Modificar</button>
+            `;
+            formModificar.style.border = "1px solid black";
+            formModificar.style.width = "200px";
+            formModificar.style.textAlign = "center";
+            formModificar.style.margin = "auto";
+            formModificar.style.padding = "3px";
+
+            formModificar.innerHTML = html;
+        }
+
+        function modificar(id) {
+            const nombre = document.getElementById('nombre').value;
+            const apellido = document.getElementById('apellido').value;
+            const fecha_nacimiento = document.getElementById('fecha_nacimiento').value;
+            const sexo = document.getElementById('sexo').value;
+            const telefono = document.getElementById('telefono').value;
+            const tratamiento = document.getElementById('tratamiento').value;
+
+            const pacienteModificado = {
+                id: id,
+                nombre: nombre,
+                apellido: apellido,
+                fecha_nacimiento: fecha_nacimiento,
+                sexo: sexo,
+                telefono: telefono,
+                tratamiento: tratamiento
+            };
+
+            ctrolPaciente.modificarPaciente(id, pacienteModificado);
+            document.getElementById("formModificar").innerHTML = "";
+            document.getElementById("formModificar").style = "";
+            armarTablaPacientes();
+        }
+
+        function añadirPaciente() {
+            const formulario = document.getElementById("formulario");
+            let html = `
+            <strong>Llenar datos</strong><br>
+            <label for="nombre">Nombre</label><br>
+            <input type="text" id="nombre" name="nombre" required><br>
+            <label for="apellido">Apellido</label><br>
+            <input type="text" id="apellido" name="apellido" required><br>
+            <label for="fecha_nacimiento">Fecha Nacimiento</label><br>
+            <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" required><br>
+            <label for="sexo">Sexo</label><br>
+            <select id="sexo" name="sexo" required>
+            <option>M</option>
+            <option>F</option>
+            </select><br>
+            <label for="telefono">Telefono</label><br>
+            <input type="number" id="telefono" name="telefono" required><br>
+            <label for="tratamiento">Tratamiento</label><br>
+            <input type="text" id="tratamiento" name="tratamiento" required><br><br>
+            <button onclick="addPaciente()">Añadir</button>
+            `;
+            formulario.style.border = "1px solid black";
+            formulario.style.width = "200px";
+            formulario.style.textAlign = "center";
+            formulario.style.margin = "auto";
+            formulario.style.padding = "3px";
+
+            formulario.innerHTML = html;
+        }
+
+        function addPaciente() {
+            const nombre = document.getElementById('nombre').value;
+            const apellido = document.getElementById('apellido').value;
+            const fecha_nacimiento = document.getElementById('fecha_nacimiento').value;
+            const sexo = document.getElementById('sexo').value;
+            const telefono = document.getElementById('telefono').value;
+            const tratamiento = document.getElementById('tratamiento').value;
+
+            const newPaciente = {
+                id: null,
+                nombre: nombre,
+                apellido: apellido,
+                fecha_nacimiento: fecha_nacimiento,
+                sexo: sexo,
+                telefono: telefono,
+                tratamiento: tratamiento
+            };
+
+            ctrolPaciente.adicionarPaciente(newPaciente);
+            document.getElementById("formulario").innerHTML = "";
+            document.getElementById("formulario").style = "";
+            armarTablaPacientes();
+
+            console.log(newPaciente.fecha_nacimiento);
+        }
+
+        function buscar() {
+            var listaPaciente = ctrolPaciente.listaPacientes;
+            const buscar = document.getElementById("buscar").value;
+            let pacientesEncontrados = [];
+
+            listaPaciente.forEach(function (paciente) {
+                if (paciente.id == buscar || paciente.nombre == buscar || paciente.apellido == buscar|| paciente.sexo == buscar|| paciente.telefono == buscar|| paciente.tratamiento==buscar|| paciente.fecha_nacimiento == buscar) {
+                    pacientesEncontrados.push(paciente);
+                }
+            });
+
+            if (pacientesEncontrados.length > 0) {
+                mostrarPaciente(pacientesEncontrados);
+            } else {
+                const tablaPaciente = document.getElementById("tablaPaciente");
+                tablaPaciente.innerHTML = `<div>"${buscar}" no está en la lista</div>`;
+            }
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="estilos_paginas.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="#">Clínica Dental</a>
+            </div>
+            <ul class="menu">
+                <li><a href="#">Inicio</a></li>
+                <li><a href="#">Servicios</a></li>
+                <li><a href="#">Equipo</a></li>
+                <li><a href="#">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+
+
+<div class="contenedorFlex">
+    <div class="input-container">
+    <h1 class="titulo-pagina2">Gestión de Pacientes</h1>
+    <!-- Formulario para agregar paciente -->
+    <form id="agregar-paciente-form">
+        <label for="ci">CI:</label>
+        <input type="text" id="ci" name="ci" required><br><br>
+
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" required><br><br>
+
+        <label for="apellido">Apellido:</label>
+        <input type="text" id="apellido" name="apellido" required><br><br>
+
+        <label for="direccion">Dirección:</label>
+        <input type="text" id="direccion" name="direccion" required><br><br>
+
+        <label for="telefono">Teléfono:</label>
+        <input type="text" id="telefono" name="telefono" required><br><br>
+
+        <button type="submit" class="custom-button">Agregar Paciente</button>
+    </form>
+</div>
+<div class="lista">
+    <h2 class="titulo-pagina">Lista de Pacientes</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>CI</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Dirección</th>
+                <th>Teléfono</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody id="pacientes-table">
+        </tbody>
+    </table>
+</div>
+</div>
+    <script>
+        class Paciente {
+            constructor(id, ci, nombre, apellido, direccion, telefono) {
+                this.id = id;
+                this.ci = ci;
+                this.nombre = nombre;
+                this.apellido = apellido;
+                this.direccion = direccion;
+                this.telefono = telefono;
+                this.editando = false;
+            }
+        }
+
+        const pacientes = [];
+        let pacienteId = 1;
+
+        const pacientesTable = document.getElementById("pacientes-table");
+        const agregarPacienteForm = document.getElementById("agregar-paciente-form");
+
+        function renderPacientes() {
+            pacientesTable.innerHTML = ""; // Limpiar la tabla
+
+            pacientes.forEach(paciente => {
+                const row = document.createElement("tr");
+                if (paciente.editando) {
+                    row.innerHTML = `
+                        <td>${paciente.id}</td>
+                        <td><input type="text" value="${paciente.ci}"></td>
+                        <td><input type="text" value="${paciente.nombre}"></td>
+                        <td><input type="text" value="${paciente.apellido}"></td>
+                        <td><input type="text" value="${paciente.direccion}"></td>
+                        <td><input type="text" value="${paciente.telefono}"></td>
+                        <td>
+                            <button onclick="guardarEdicion(${paciente.id})" class="custom-button">Guardar</button>
+                        </td>
+                    `;
+                } else {
+                    row.innerHTML = `
+                        <td>${paciente.id}</td>
+                        <td>${paciente.ci}</td>
+                        <td>${paciente.nombre}</td>
+                        <td>${paciente.apellido}</td>
+                        <td>${paciente.direccion}</td>
+                        <td>${paciente.telefono}</td>
+                        <td>
+                            <button onclick="editarPaciente(${paciente.id})" class="custom-button">Editar</button>
+                            <button onclick="eliminarPaciente(${paciente.id})" class="custom-button">Eliminar</button>
+                            <a href="Gestionar_dentadura.html" class ="link"> Gestionar Dentadura</a>
+                        </td>
+                    `;
+                }
+
+                pacientesTable.appendChild(row);
+            });
+        }
+
+        function agregarPaciente(ci, nombre, apellido, direccion, telefono) {
+            const nuevoPaciente = new Paciente(pacienteId, ci, nombre, apellido, direccion, telefono);
+            pacientes.push(nuevoPaciente);
+            pacienteId++;
+            renderPacientes();
+        }
+
+        function editarPaciente(id) {
+            const paciente = pacientes.find(p => p.id === id);
+            paciente.editando = true;
+            renderPacientes();
+        }
+
+        function guardarEdicion(id) {
+            const paciente = pacientes.find(p => p.id === id);
+            paciente.ci = pacientesTable.querySelector(`[value='${paciente.ci}']`).value;
+            paciente.nombre = pacientesTable.querySelector(`[value='${paciente.nombre}']`).value;
+            paciente.apellido = pacientesTable.querySelector(`[value='${paciente.apellido}']`).value;
+            paciente.direccion = pacientesTable.querySelector(`[value='${paciente.direccion}']`).value;
+            paciente.telefono = pacientesTable.querySelector(`[value='${paciente.telefono}']`).value;
+            paciente.editando = false;
+            renderPacientes();
+        }
+
+        function eliminarPaciente(id) {
+            const pacienteIndex = pacientes.findIndex(paciente => paciente.id === id);
+            if (pacienteIndex !== -1) {
+                pacientes.splice(pacienteIndex, 1);
+                renderPacientes();
+            }
+        }
+
+        agregarPacienteForm.addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            const ci = document.getElementById("ci").value;
+            const nombre = document.getElementById("nombre").value;
+            const apellido = document.getElementById("apellido").value;
+            const direccion = document.getElementById("direccion").value;
+            const telefono = document.getElementById("telefono").value;
+
+            agregarPaciente(ci, nombre, apellido, direccion, telefono);
+            this.reset(); // Limpia el formulario
+        });
+
+        renderPacientes();
+    </script>
+</body>
+</html>

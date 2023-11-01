@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="estiloHistoria.css">
+    <title>Document</title>
+</head>
+<div class="titulo">
+<h1>Gestión de Historia Clínica</h1>
+</div>
+<!-- Formulario para agregar historia clínica -->
+<div class="formulario"> 
+<form id="agregar-historia-clinica-form">
+    <label for="nombre-paciente">Nombre del Paciente:</label>
+    <input type="text" id="nombre-paciente" name="nombre-paciente" required><br><br>
+
+    <label for="edad-paciente">Edad del Paciente:</label>
+    <input type="number" id="edad-paciente" name="edad-paciente" required><br><br>
+
+    <label for="diagnostico">Diagnóstico:</label>
+    <input type="text" id="diagnostico" name="diagnostico" required><br><br>
+
+    <label for="tratamiento">Tratamiento:</label>
+    <input type="text" id="tratamiento" name="tratamiento" required><br><br>
+
+    <label for="pruebas">Pruebas Médicas:</label>
+    <input type="text" id="pruebas" name="pruebas" required><br><br>
+
+    <button type="submit">Agregar Historia Clínica</button>
+    <button><a href="Gestionar_pacientes.html"> Gestionar Pacientes</a></button>
+</form>
+</div>
+<h2>Lista de Historias Clínicas</h2>
+<div class="lista">
+<table border="1">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre del Paciente</th>
+            <th>Edad del Paciente</th>
+            <th>Diagnóstico</th>
+            <th>Tratamiento</th>
+            <th>Pruebas Médicas</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody id="historias-clinicas-table">
+    </tbody>
+</table>
+</div>
+<script>
+    class HistoriaClinica {
+        constructor(id, nombrePaciente, edadPaciente, diagnostico, tratamiento, pruebas) {
+            this.id = id;
+            this.nombrePaciente = nombrePaciente;
+            this.edadPaciente = edadPaciente;
+            this.diagnostico = diagnostico;
+            this.tratamiento = tratamiento;
+            this.pruebas = pruebas;
+            this.editando = false;
+        }
+    }
+
+    const historiasClinicas = [];
+    let historiaClinicaId = 1;
+
+    const historiasClinicasTable = document.getElementById("historias-clinicas-table");
+    const agregarHistoriaClinicaForm = document.getElementById("agregar-historia-clinica-form");
+
+    function renderHistoriasClinicas() {
+        historiasClinicasTable.innerHTML = ""; // Limpiar la tabla
+
+        historiasClinicas.forEach(historiaClinica => {
+            const row = document.createElement("tr");
+            if (historiaClinica.editando) {
+                row.innerHTML = `
+                    <td>${historiaClinica.id}</td>
+                    <td><input type="text" value="${historiaClinica.nombrePaciente}"></td>
+                    <td><input type="number" value="${historiaClinica.edadPaciente}"></td>
+                    <td><input type="text" value="${historiaClinica.diagnostico}"></td>
+                    <td><input type="text" value="${historiaClinica.tratamiento}"></td>
+                    <td><input type="text" value="${historiaClinica.pruebas}"></td>
+                    <td>
+                        <button onclick="guardarEdicion(${historiaClinica.id})">Guardar</button>
+                    </td>
+                `;
+            } else {
+                row.innerHTML = `
+                    <td>${historiaClinica.id}</td>
+                    <td>${historiaClinica.nombrePaciente}</td>
+                    <td>${historiaClinica.edadPaciente}</td>
+                    <td>${historiaClinica.diagnostico}</td>
+                    <td>${historiaClinica.tratamiento}</td>
+                    <td>${historiaClinica.pruebas}</td>
+                    <td>
+                        <button onclick="editarHistoriaClinica(${historiaClinica.id})">Editar</button>
+                        <button onclick="eliminarHistoriaClinica(${historiaClinica.id})">Eliminar</button>
+                    </td>
+                `;
+            }
+
+            historiasClinicasTable.appendChild(row);
+        });
+    }
+
+    function agregarHistoriaClinica(nombrePaciente, edadPaciente, diagnostico, tratamiento, pruebas) {
+        const nuevaHistoriaClinica = new HistoriaClinica(historiaClinicaId, nombrePaciente, edadPaciente, diagnostico, tratamiento, pruebas);
+        historiasClinicas.push(nuevaHistoriaClinica);
+        historiaClinicaId++;
+        renderHistoriasClinicas();
+    }
+
+    function editarHistoriaClinica(id) {
+        const historiaClinica = historiasClinicas.find(hc => hc.id === id);
+        historiaClinica.editando = true;
+        renderHistoriasClinicas();
+    }
+
+    function guardarEdicion(id) {
+        const historiaClinica = historiasClinicas.find(hc => hc.id === id);
+        historiaClinica.nombrePaciente = historiasClinicasTable.querySelector(`[value='${historiaClinica.nombrePaciente}']`).value;
+        historiaClinica.edadPaciente = historiasClinicasTable.querySelector(`[value='${historiaClinica.edadPaciente}']`).value;
+        historiaClinica.diagnostico = historiasClinicasTable.querySelector(`[value='${historiaClinica.diagnostico}']`).value;
+        historiaClinica.tratamiento = historiasClinicasTable.querySelector(`[value='${historiaClinica.tratamiento}']`).value;
+        historiaClinica.pruebas = historiasClinicasTable.querySelector(`[value='${historiaClinica.pruebas}']`).value;
+        historiaClinica.editando = false;
+        renderHistoriasClinicas();
+    }
+
+    function eliminarHistoriaClinica(id) {
+        const historiaClinicaIndex = historiasClinicas.findIndex(hc => hc.id === id);
+        if (historiaClinicaIndex !== -1) {
+            historiasClinicas.splice(historiaClinicaIndex, 1);
+            renderHistoriasClinicas();
+        }
+    }
+
+    agregarHistoriaClinicaForm.addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        const nombrePaciente = document.getElementById("nombre-paciente").value;
+        const edadPaciente = document.getElementById("edad-paciente").value;
+        const diagnostico = document.getElementById("diagnostico").value;
+        const tratamiento = document.getElementById("tratamiento").value;
+        const pruebas = document.getElementById("pruebas").value;
+
+        agregarHistoriaClinica(nombrePaciente, edadPaciente, diagnostico, tratamiento, pruebas);
+        this.reset(); // Limpia el formulario
+    });
+
+    renderHistoriasClinicas();
+</script>
+</body>
+</html>

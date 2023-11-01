@@ -1,0 +1,97 @@
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;800&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400;800&display=swap');
+
+
+  *{
+    font-family: 'Montserrat';
+  }
+  body{
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+    background-color: aliceblue;
+    background: linear-gradient(to right, #75e59b, #003350);
+    backdrop-filter: blur(100px);
+  }
+  h3{
+    color: white;
+    font-weight:bold;
+    font-size: 20pt;
+    
+  }
+
+  .contenedor{
+    display: flex;
+    width: 50%;
+    height: 50%;
+    border-radius: 20px;
+    background-color: #003350;
+    margin: auto;
+
+  }
+  .contenedorIzquierdo{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    justify-content: center;
+    align-items:center;
+    
+  }
+  .contenedorDerecho{
+    display: flex;
+    justify-content: end;
+    padding: 0;
+    align-items: end;
+    background-color: #75e59b;
+    width: 50%;
+    border-radius: 70px 20px 20px 70px;
+  }
+  .contenedorIzquierdo form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .contenedorImagen img{
+    display: flex;
+    justify-content: end;
+    width: 80%;
+    margin: auto;
+  }
+  .contenedorIzquierdo form input{
+    margin-top: 20px;
+    border-style: none;
+    width: 80%;
+    height: 25px;
+    border-radius: 15px;
+    text-align: center;
+  }
+  .contenedorIzquierdo form input::placeholder{
+    text-align: center;
+  }
+  .contenedorIzquierdo form span{
+    color: aliceblue;
+    font-size: 10pt;
+    margin: 10px;
+  }
+  .contenedorIzquierdo form a{
+    margin-top: 20px ;
+    text-decoration: none;
+    color: white;
+    text-decoration-line:underline;
+  }
+
+  .contenedorIzquierdo form button{
+    width: 35%;
+    height: 35px;
+    border-radius: 50px;
+    border-style: none;
+    margin-top: 20px;
+    color: #003350;
+    background-color: #75e59b;
+    font-weight: 400;
+  }
+
+  
