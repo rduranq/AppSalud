@@ -128,7 +128,7 @@ var Listar_Usuarios = function () {
 
   //  var pos = 0;
   for (let i = 0; i < usuarios.length; i++) {
-    let medico = new Usuario(
+    let usuario = new Usuario(
       usuarios[i][0],
       usuarios[i][1],
       usuarios[i][2],
@@ -138,7 +138,7 @@ var Listar_Usuarios = function () {
     );
 
     // listaUsuarios.push(medico);
-    controlUsuario.adicionar_Usuario(medico);
+    controlUsuario.adicionar_Usuario(usuario);
   }
 };
 

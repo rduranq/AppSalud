@@ -1,222 +1,209 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../styles/medicos.css" />
+    <title>Document</title>
+    <script src="../class/medico.js"></script>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="../styles/medicos.css">
-  <title>Document</title>
-  <script src="../class/medico.js"></script>
-</head>
+    <style>
+      .card-medico {
+        display: flex;
+        width: 1100px;
+        border: 1px solid black;
+        margin-top: 50px;
+      }
 
-<body>
+      .card-medico img {
+        width: 400px;
+        border-radius: 50%;
+      }
+
+      .card-medico .perfil {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        /* align-items: center; */
+        padding: 10px;
+        gap: 10px;
+      }
+
+      .card-medico .perfil p {
+        font-size: 1.5rem;
+        font-weight: bold;
+        /* text-align: center; */
+        padding-left: 10px;
+      }
+
+      .card-medico .perfil .nombre {
+        font-size: 1.4rem;
+        color: blue;
+      }
+
+      .card-medico .informacion {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        height: 100%;
+      }
+
+      .card-medico .informacion h2 {
+        font-size: 2.5rem;
+        text-align: center;
+      }
+
+      .card-medico .informacion h3 {
+        font-size: 1.5rem;
+        color: blue;
+      }
+
+      .card-medico .informacion p {
+        font-size: 1.8rem;
+      }
+
+      .card-medico .informacion a {
+        background: orangered;
+        width: 70px;
+        padding: 5px;
+        color: white;
+        border-radius: 5px;
+      }
+    </style>
+  </head>
+
+  <body>
     <nav>
-        <div class="logo items-nav">
-          <!-- <img src="icons/house-solid.svg" width="80px" height="50px"/> -->
-          <img src="../icons/house-solid.svg" alt="House icon" width="80px" height="50px"/>
+      <div class="logo items-nav">
+        <!-- <img src="icons/house-solid.svg" width="80px" height="50px"/> -->
+        <img
+          src="../icons/house-solid.svg"
+          alt="House icon"
+          width="80px"
+          height="50px"
+        />
+      </div>
+      <div class="items-nav medio">
+        <div>
+          <img
+            src="../icons/truck-medical-solid.svg"
+            alt=""
+            width="80px"
+            height="50px"
+          />
         </div>
-        <div class="items-nav medio ">
-          <div><img src="../icons/truck-medical-solid.svg" alt="" width="80px" height="50px" /></div>
-          <div>MEDI-CONECT</div>
-        </div>
-        <div class="items-nav login">
-          <h3 class="item-login" onclick="location.href='inicio.html'">Volver</h3>
-        </div>
+        <div>MEDI-CONECT</div>
+      </div>
+      <div class="items-nav login">
+        <h3 class="item-login" onclick="location.href='inicio.html'">Volver</h3>
+      </div>
     </nav>
-   <h2 class="textCenter">Medicos con sus Especialidades</h2>
+    <h2 class="textCenter">Medicos con sus Especialidades</h2>
 
-  <div id="botones" class="botones">
-    <input type="text" id="buscar" placeholder="Datos del Medico">
-    <button onclick="buscar()">Buscar</button>
-  </div>
-  
+    <div id="botones" class="botones">
+      <input type="text" id="buscar" placeholder="Datos del Medico" />
+      <button onclick="buscar()">Buscar</button>
+      <button onclick="card_medicos(lista_Medicos);">Lista de Medicos</button>
+    </div>
 
+    <div class="container" id="container"></div>
 
+    <!-- <div class="card-medico">
+      <div class="perfil">
+        <img src="../images/juan.jpg" alt="" />
+        <p>Juan</p>
+        <p>Perez</p>
+        <p>gonzales2013@gmail.com</p>
+        <p>5683i792</p>
+        <p>Calle Molajd Nro # 234</p>
+      </div>
+      <div class="informacion">
+        <h2>Dr. Juan Perez</h2>
+        <h3>Universidad San Francisco Xavier de Chuquiscaca</h3>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero minus
+          mollitia eius itaque perspiciatis, doloribus quod. Praesentium debitis
+          soluta at mollitia. Id consequatur officiis ea, voluptate fugit
+          numquam quidem adipisci.
+        </p>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas,
+          eos! Ullam, culpa nihil! Totam obcaecati consectetur aut
+          necessitatibus quisquam, numquam et consequuntur odit incidunt dicta
+          exercitationem laboriosam sed eligendi magnam?
+        </p>
+        <a href="#">Mas Inf.</a>
+      </div>
+    </div> -->
 
+    <script>
+      var lista_Medicos = controlMedico.obtenerListaMedicos();
 
+      var container = document.getElementById("container");
+      container.innerHTML = "";
 
+      function card_medicos(listaMedicos) {
+        console.log(lista_Medicos);
+        var html = '';
+        listaMedicos.forEach((medico) => {
+          html += `
+          <div class="card-medico">
+      <div class="perfil">
+        <img src="../images/${medico.foto}" alt="" />
+        <p id="nombre">${medico.nombre}</p>
+        <p>${medico.apellido}</p>
+        <p>${medico.email}</p>
+        <p>${medico.telefono}</p>
+        <p>${medico.direccion}</p>
+      </div>
+      <div class="informacion">
+        <h2>Dr. Juna perez</h2>
+        <h3>Universidad San Francisco Xavier de Chuquiscaca</h3>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero minus
+          mollitia eius itaque perspiciatis, doloribus quod. Praesentium debitis
+          soluta at mollitia. Id consequatur officiis ea, voluptate fugit
+          numquam quidem adipisci.
+        </p>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas,
+          eos! Ullam, culpa nihil! Totam obcaecati consectetur aut
+          necessitatibus quisquam, numquam et consequuntur odit incidunt dicta
+          exercitationem laboriosam sed eligendi magnam?
+        </p>
+        <a href="#">Mas Inf.</a>
+      </div>
+    </div>
+      `;
+        });
+        container.innerHTML = html;
+      }
 
+      function mostrarLista(listaMedicos) {
+        document.getElementById("tabla_medicos").innerHTML =
+          armar_tabla_medicos(listaMedicos);
+        document.getElementById("formulario").innerHTML = "";
+        document.getElementById("formulario").style.backgroundColor = "#f0f0f0";
+        document.getElementById("formulario").style.border =
+          "1px solid #f0f0f0";
+      }
 
+      function buscar() {
+        let medicoBuscar = document.getElementById("buscar").value;
 
-
-
-<div class="card-medico">
-  <div class="perfil">
-    <img src="" alt="">
-  </div>
-  <div class="informacion"></div>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
-  <script>
-    let Ctr_medico = new ControlMedico();
-    Ctr_medico.listar_medicos();
-    let lista_medicos = Ctr_medico.listaMedicos;
-    console.console.log(lista_medicos);
-    
-
-    function armar_tabla_medicos(medicos) {
-      const tablaMedicos = document.getElementById("tabla_medicos");
-      var html =``;
-      medicos.forEach(function (medico) {
-        html += ` 
-              <p>${medico.nombre}</p>
-              <img src="../images/login.jpg" height="100px"> <br>
-              <div class="descripcion">${medico.descripcion}</div>
-                                                      
-              `;
-      });
-      html += `</tbody>
-        </table>`;
-      return html;
-    }
-
-    function mostrarLista(listaMedicos) {
-      document.getElementById("tabla_medicos").innerHTML = armar_tabla_medicos(listaMedicos);
-      document.getElementById("formulario").innerHTML="";    
-      document.getElementById('formulario').style.backgroundColor = "#f0f0f0"
-      document.getElementById('formulario').style.border = "1px solid #f0f0f0"   
-    }
-
-    // function añadirMedico() {
-    //   //limpio la lista
-    //   document.getElementById("tabla_medicos").innerHTML="";  
-
-    //   document.getElementById('formulario').innerHTML =
-    //     `
-    //     <h2>Registrar nuevo medico</h2>
-    //     <label for="nombre">Nombre</label>
-    //     <input type="text" name="nombre">
-    //     <label for="cuenta">Cuenta</label>
-    //     <input type="text" name="cuenta">
-    //     <label for "clave">Clave</label>
-    //     <input type="text" name="clave">
-    //     <label for="email">Email</label>
-    //     <input type="text" name="email">
-    //     <label for="rol">Rol</label>
-    //     <select name="rol" id="">
-    //       <option value="medico">Medico</option>
-    //       <option value="administrador">Administrador</option>
-    //     </select>
-    //     <br>
-    //     <input type="button" value="Registrar">
-    //     `
-    //   document.getElementById('formulario').style.backgroundColor = "#fff"
-    //   document.getElementById('formulario').style.border = "1px solid #ddd"
-    // }
-
-    // var formulario = document.getElementById("formulario");
-    // var newId = lista_medicos.length;
-
-    // formulario.addEventListener("submit", function (event) {
-    //   event.preventDefault();
-    //   let nombre = formulario.nombre.value;
-    //   let cuenta = formulario.cuenta.value;
-    //   let clave = formulario.clave.value;
-    //   let email = formulario.email.value;
-    //   let rol = formulario.rol.value;
-    //   if (nombre == "" || cuenta == "" || clave == "" || email == "" || rol == "") {
-    //     alert("Debe llenar todos los campos");
-    //   } else {
-        
-    //     newId++;
-    //     let medico = new Medico(newId, nombre, cuenta, clave, email, rol);
-    //     Ctr_medico.adicionar_Medico(medico);
-    //     if (document.getElementById("tabla_medicos").innerHTML == '') {
-    //       document.getElementById("tabla_medicos").innerHTML = ''
-    //     } else {
-    //       mostrarLista(Ctr_medico.listaMedico);
-    //     }
-    //     formulario.reset();
-    //   }
-    // });
-
-
-    function buscar() {
-      let medicoBuscar = document.getElementById("buscar").value;
-      
-      Ctr_medico.listaMedicos.forEach(function (medico) {
-        if (medico.id == medicoBuscar || medico.nombre == medicoBuscar || medico.esperiencia == medicoBuscar ) {
-          let ctrlMedico = new ControlMedico();
-          ctrlMedico.adicionar_Medico(medico);
-          console.log(ctrlMedico.listaMedicos)
-          mostrarLista(ctrlMedico.listaMedicos)
-        }
-      })
-    }
-
-    // function eliminar(id) {
-    //   document.getElementsByName("eliminar").forEach(function (boton) {
-    //     if (boton.value == id) {
-    //       Ctr_medico.eliminar(id)
-    //       mostrarLista(Ctr_medico.listaMedico)
-    //     }
-    //   })
-    // }
-
-    // let medicoAActualizarId = null;
-
-// function modificar(id) {
-//   medicoAActualizarId = id;
-//   Ctr_medico.listaMedico.forEach(function (medico) {
-//     if (medico.id === id) {
-//       document.getElementById('formulario').innerHTML = `
-//         <h2>Modificar Medico</h2>
-//         <label for="nombre">Nombre</label>
-//         <input type="text" name="nombre" value="${medico.nombre}">
-//         <label for="cuenta">Cuenta</label>
-//         <input type="text" name="cuenta" value="${medico.cuenta}">
-//         <label for="clave">Clave</label>
-//         <input type="text" name="clave" value="${medico.clave}">
-//         <label for="email">Email</label>
-//         <input type="text" name="email" value="${medico.email}">
-//         <label for="rol">Rol</label>
-//         <select name="rol" id="">
-//           <option value="medico">Medico</option>
-//           <option value="administrador">Administrador</option>
-//         </select>
-//         <br>
-//         <input type="button" onclick="actualizar()" value="Actualizar">
-//       `;
-//       document.getElementById('formulario').style.backgroundColor = "#fff";
-//       document.getElementById('formulario').style.border = "1px solid #ddd";
-//     }
-//   });
-// }
-
-// function actualizar() {
-//   if (medicoAActualizarId !== null) {
-//     let formulario = document.getElementById("formulario");
-//     let nombre = formulario.nombre.value;
-//     let cuenta = formulario.cuenta.value;
-//     let clave = formulario.clave.value;
-//     let email = formulario.email.value;
-//     let rol = formulario.rol.value;
-
-//     Ctr_medico.modificar(medicoAActualizarId-1, nombre, cuenta, clave, email, rol);
-
-//     formulario.reset();
-
-//     medicoAActualizarId = null;
-//     mostrarLista(Ctr_medico.listaMedico);
-    
-//   }
-// }
-  
-  </script>
- </body>
-
+        Ctr_medico.listaMedicos.forEach(function (medico) {
+          if (
+            medico.id == medicoBuscar ||
+            medico.nombre == medicoBuscar ||
+            medico.esperiencia == medicoBuscar
+          ) {
+            let ctrlMedico = new ControlMedico();
+            ctrlMedico.adicionar_Medico(medico);
+            console.log(ctrlMedico.listaMedicos);
+            mostrarLista(ctrlMedico.listaMedicos);
+          }
+        });
+      }
+    </script>
+  </body>
 </html>
