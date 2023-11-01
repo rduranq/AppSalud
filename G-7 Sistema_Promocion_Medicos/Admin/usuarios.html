@@ -84,7 +84,7 @@
         event.preventDefault();
 
         var nv_id = lista_usuarios.length - 1;
-        // console.log(id_user);
+        // console.log(id_medico);
 
         // const id = document.getElementById("id").value;
         const nombre = document.getElementById("nombre").value;
@@ -150,10 +150,10 @@
         var usuario_encontrado = false;
 
         lista_usuarios.forEach((usuario) => {
-          var id_user = usuario.id.toString();
+          var id_medico = usuario.id.toString();
 
           switch (dato_buscar) {
-            case id_user:
+            case id_medico:
             case usuario.nombre:
             case usuario.cuenta:
             case usuario.email:
@@ -173,16 +173,16 @@
         });
       }
 
-      function formEditUsuario(id_user) {
+      function formEditUsuario(id_medico) {
         var listaUsuarios = controlUsuario.obtenerListaUsuarios();
-        var usuario = listaUsuarios.find((user) => user.id == id_user);
+        var usuario = listaUsuarios.find((medico) => medico.id == id_medico);
 
-        var rolUser = usuario.rol;
+        var rolmedico = usuario.rol;
 
-        if (rolUser == "Admin") {
-            rolUser = "Usuario";
+        if (rolmedico == "Admin") {
+            rolmedico = "Usuario";
         } else {
-            rolUser = "Admin";
+            rolmedico = "Admin";
         }
 
         var html_formUsuario = `
@@ -204,7 +204,7 @@
           <label for="rol">Rol:</label>
           <select id="rol" name="rol" required>
             <option value="${usuario.rol}">${usuario.rol}</option>
-            <option value="${rolUser}">${rolUser}</option>
+            <option value="${rolmedico}">${rolmedico}</option>
           </select>
 
           <button class="registro-button" id="btn_editar" onclick="editarUsuario(${usuario.id})">Actualizar</button> 
@@ -213,8 +213,8 @@
 
         container.innerHTML = html_formUsuario;
       }
-      function editarUsuario(idUser) {
-        // console.log('idUser');
+      function editarUsuario(idmedico) {
+        // console.log('idmedico');
         var listaUsuarios = controlUsuario.obtenerListaUsuarios();
 
         var nombre = document.getElementById("nombre").value;
@@ -224,7 +224,7 @@
         var rol = document.getElementById("rol").value;
 
         console.log(nombre);
-        var usuarioEncontrado = listaUsuarios.find((user) => user.id == idUser);
+        var usuarioEncontrado = listaUsuarios.find((medico) => medico.id == idmedico);
         // console.log(usuarioEncontrado);
 
         usuarioEncontrado.nombre = nombre;

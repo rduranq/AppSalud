@@ -33,7 +33,7 @@ class ControlUsuario {
   }
 
   buscar_usuario(usuario){
-    let usuarioEncontrado = this.listaUsuario.find(user => user.email === usuario.email && user.clave === usuario.clave);
+    let usuarioEncontrado = this.listaUsuario.find(medico => medico.email === usuario.email && medico.clave === usuario.clave);
     return usuarioEncontrado;
   }
 
@@ -95,7 +95,7 @@ var controlUsuario = new ControlUsuario();
 
 var Iniciar_secion = () => {
   var email = document.getElementById("email").value;
-  var clave = document.getElementById("clave").value;
+  var clave = document.getElementById("password").value;
 
   let usuario = {
     email: email,
@@ -105,11 +105,12 @@ var Iniciar_secion = () => {
   let usuarioValido = controlUsuario.verificar_Usuario(usuario);
   var listaUsuario = controlUsuario.obtenerListaUsuarios();
 
-  var usuario_ = listaUsuario.find(user => user.email == email || user.clave == clave);
+  var usuario_ = listaUsuario.find(medico => medico.email == email || medico.clave == clave);
   
   if (usuarioValido) {
     alert("Bienvenido " + usuario_.nombre);
-    open("usuarios.html");
+    open('inicio.html');
+    // window.open('inicio.html', '_blank');
   } else {
     alert("Usuario inválido");
   }
@@ -127,7 +128,7 @@ var Listar_Usuarios = function () {
 
   //  var pos = 0;
   for (let i = 0; i < usuarios.length; i++) {
-    let user = new Usuario(
+    let medico = new Usuario(
       usuarios[i][0],
       usuarios[i][1],
       usuarios[i][2],
@@ -136,8 +137,8 @@ var Listar_Usuarios = function () {
       usuarios[i][5]
     );
 
-    // listaUsuarios.push(user);
-    controlUsuario.adicionar_Usuario(user);
+    // listaUsuarios.push(medico);
+    controlUsuario.adicionar_Usuario(medico);
   }
 };
 

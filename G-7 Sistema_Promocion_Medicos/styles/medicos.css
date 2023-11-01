@@ -55,6 +55,7 @@
     background-color: rgba(0, 0, 0, 0);
     color: #000000;
     border: 1px solid #8f8e8e;
+    margin: auto;
   }
   
   input:focus {
@@ -73,7 +74,7 @@
   button {
     width: 268px;
     height: 2.5rem;
-    border-radius: 22px;
+    border-radius: 15px;
     border: none;
     padding: 0.5rem;
     font-size: 1.1rem;
@@ -81,10 +82,11 @@
     cursor: pointer;
     color: #fff;
     background-color:#83ADFF;
+    margin: auto;
   }
   
   button:hover {
-    background-color: #0e8871;
+    background-color: #6090D0;
   }
   
   a {
@@ -103,13 +105,16 @@
 
   .textCenter{
     text-align: center;
+    color: midnightblue;
   }
   
-  #botones{
+  .botones{
     display: flex;
     flex-direction: column;
+    justify-content: center;
     gap: 10px;
-    width: 38%;
+    height: 100;
+
   }
   
   #formulario {
@@ -125,9 +130,10 @@
     margin-top: 10px;
   }
 
-  .container{
-    display: flex;
-    flex-direction: row;
+  .descripcion{
+    width: 300px;
   }
+
+  
 
   

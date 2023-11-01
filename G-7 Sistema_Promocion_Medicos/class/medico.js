@@ -1,11 +1,12 @@
+
 class Medico{
-    constructor(id, foto, nombre, email, password, esperiencia,educacion, direccion, hr_disponible, id_especialidad){
+    constructor(id, foto, nombre, email, password, descripcion,educacion, direccion, hr_disponible, id_especialidad){
         this.id = id;
         this.foto = foto;
         this.nombre = nombre;
         this.email = email;
         this.password = password;
-        this.esperiencia = esperiencia;
+        this.descripcion = descripcion;
         this.educacion = educacion;
         this.direccion = direccion;
         this.hr_disponible = hr_disponible;
@@ -27,7 +28,7 @@ class ControlMedico{
     }
 
     buscar_medico(medico){
-        let medicoEncontrado = this.listaMedicos.find(user => user.email === medico.email && user.password === medico.password);
+        let medicoEncontrado = this.listaMedicos.find(medico => medico.email === medico.email && medico.password === medico.password);
         return medicoEncontrado;
     }
 
@@ -43,7 +44,7 @@ class ControlMedico{
             medicoAModificar.nombre = nv_nombre;
             medicoAModificar.email = nv_email;
             medicoAModificar.password = nv_password;
-            medicoAModificar.esperiencia = nv_esperiencia;
+            medicoAModificar.descripcion = nv_descripcion;
             medicoAModificar.educacion = nv_educacion;
             medicoAModificar.direccion = nv_direccion;
             medicoAModificar.hr_disponible = nv_hr_disponible;
@@ -78,7 +79,9 @@ class ControlMedico{
 
     listar_medicos(){
         let medicos = [
-            [0, "foto", "Juan", "juanito@gmail.com", "123", "Radioterapia", "USFX", "Calle Loa Nr: 122", "10:00am a 12:00pm", 1],
+            [0, "foto", "Juan", "juanito@gmail.com", "123", "Cofundador, socio, y Global Business Development Manager MD con MBA, especializado en nuevos negocios e innovación en el área de la salud. Tiene experiencia en compañías aseguradoras, así como en gestión clínica y sanitaria, y está interesado en el turismo médico, la innovación en dispositivos médicos, y nuevos servicios TIC de salud Cofundador de la startup Doctoralia, ahora parte del Grupo Docplanner, la plataforma líder global que pone en contacto a pacientes y especialistas. Además, asesora otros proyectos digitales desde Barcelona Health Hub con Braincats Consulting, como el e-commerce médico Clinicpoint, el servicio de IA Universal Customer, o el servicio de telemedicina y control de pacientes crónicos Doctivi", "USFX", "Calle Loa Nr: 122", "10:00am a 12:00pm", 1],
+            
+            
             [1, "foto", "Pedro", "pedro@gmail.com", "1a2", "Radioterapia", "USFX", "Calle Loa Nr: 122", "10:00am a 12:00pm", 1],
             [2, "foto", "Lucas", "lucas@gmail.com", "afed", "Radioterapia", "USFX", "Calle Loa Nr: 122", "10:00am a 12:00pm", 1],
             [3, "foto", "Margarita", "margarita@gmail.com", "120fr3", "Radioterapia", "USFX", "Calle Loa Nr: 122", "10:00am a 12:00pm", 1],

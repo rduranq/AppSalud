@@ -2,7 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-family: sans-serif;
 }
 
 nav {
@@ -92,3 +92,94 @@ input:hover {
   transform: scale(1.1);
   transition: 0.1s;
 }
+
+
+.container .navigation img{
+  width: 100px;
+  border-radius: 50%;
+}
+
+.container .navigation{
+  display: flex;
+  align-items: center;
+  margin-top: 50px;
+  /* width: 100%; */
+  justify-content: space-between;
+  background-color: rgba(48, 194, 202, 0.358);
+  margin-left: 20px;
+  margin-right: 20px;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.container .navigation ul{
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 5rem;
+}
+
+.container .navigation ul li{
+  cursor: pointer;
+  margin-right: 20px;
+}
+
+.container .navigation ul li a{
+  text-decoration: none;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+.container .navigation ul li a:hover{
+  color: blue;
+}
+
+.container .navigation ul li:hover{
+  transform: scale(1.1);
+  transition: 0.25s;
+}
+
+.about{
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+.about h2{
+  text-align: center;
+  font-size: 2.5rem;
+}
+
+.about p{
+  font-size: 1.6rem;
+  padding-top: 20px;
+}
+
+.about ul{
+  margin-top: 10px;
+  display: flex;
+  /* width: 100%; */
+  flex-direction: column;
+  /* background: #83ADFF; */
+  /* text-align: center; */
+  margin-left: 50px;
+  gap: 10px;
+}
+.about ul li{
+  font-size: 1.4rem;
+}
+
+.about ol{
+  margin-top: 40px;
+  margin-left: 50px;
+}
+
+.about ol li a{
+  font-size: 1.5rem;
+  color: rgb(0, 162, 255);
+  font-weight: bold;
+}
+
+.about .footer{
+  margin-top: 3rem;
+  text-align: center;
+}
+

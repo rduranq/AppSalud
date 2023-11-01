@@ -23,7 +23,7 @@ class ControlEspecialidad{
     }
     
     buscar_especialidad(especialidad){
-        let especialidadEncontrada = this.listaEspecialidad.find(user => user.nombreEsp === especialidad.nombreEsp);
+        let especialidadEncontrada = this.listaEspecialidad.find(medico => medico.nombreEsp === especialidad.nombreEsp);
         return especialidadEncontrada;
     }
     
