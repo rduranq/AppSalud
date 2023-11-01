@@ -6,76 +6,12 @@
     <link rel="stylesheet" href="../styles/medicos.css" />
     <title>Document</title>
     <script src="../class/medico.js"></script>
-
-    <style>
-      .card-medico {
-        display: flex;
-        width: 1100px;
-        border: 1px solid black;
-        margin-top: 50px;
-      }
-
-      .card-medico img {
-        width: 400px;
-        border-radius: 50%;
-      }
-
-      .card-medico .perfil {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        /* align-items: center; */
-        padding: 10px;
-        gap: 10px;
-      }
-
-      .card-medico .perfil p {
-        font-size: 1.5rem;
-        font-weight: bold;
-        /* text-align: center; */
-        padding-left: 10px;
-      }
-
-      .card-medico .perfil .nombre {
-        font-size: 1.4rem;
-        color: blue;
-      }
-
-      .card-medico .informacion {
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-        height: 100%;
-      }
-
-      .card-medico .informacion h2 {
-        font-size: 2.5rem;
-        text-align: center;
-      }
-
-      .card-medico .informacion h3 {
-        font-size: 1.5rem;
-        color: blue;
-      }
-
-      .card-medico .informacion p {
-        font-size: 1.8rem;
-      }
-
-      .card-medico .informacion a {
-        background: orangered;
-        width: 70px;
-        padding: 5px;
-        color: white;
-        border-radius: 5px;
-      }
-    </style>
+    <script src="../class/especialidad.js"></script>
   </head>
 
   <body>
-    <nav>
+    <nav class="navigation">
       <div class="logo items-nav">
-        <!-- <img src="icons/house-solid.svg" width="80px" height="50px"/> -->
         <img
           src="../icons/house-solid.svg"
           alt="House icon"
@@ -98,78 +34,94 @@
         <h3 class="item-login" onclick="location.href='inicio.html'">Volver</h3>
       </div>
     </nav>
-    <h2 class="textCenter">Medicos con sus Especialidades</h2>
 
-    <div id="botones" class="botones">
-      <input type="text" id="buscar" placeholder="Datos del Medico" />
-      <button onclick="buscar()">Buscar</button>
-      <button onclick="card_medicos(lista_Medicos);">Lista de Medicos</button>
+    <h2 class="title">Medicos con sus Especialidades</h2>
+
+
+    <div id="container-buscar" class="container-buscar">
+      <button onclick="card_medicos(lista_Medicos, lista_Especialidad);">Lista de Medicos</button>
+       
+      <div class="buscar">
+        <div class="option-buscar">
+          <input type="text" id="dato" placeholder="Datos del Medico" />
+          <select name="especialidad"  id="especialidad" title="Choose an option" onchange="buscar_medico(lista_Medicos, lista_Especialidad)"></select>
+        </div>
+        <button onclick="buscar_medico(lista_Medicos, lista_Especialidad);">Buscar</button>
+      </div>
     </div>
+    <p id="message"></p>
 
-    <div class="container" id="container"></div>
+    <div class="container" id="container">
+      <!-- Insertar contenido -->
+    </div>
+    
 
-    <!-- <div class="card-medico">
-      <div class="perfil">
-        <img src="../images/juan.jpg" alt="" />
-        <p>Juan</p>
-        <p>Perez</p>
-        <p>gonzales2013@gmail.com</p>
-        <p>5683i792</p>
-        <p>Calle Molajd Nro # 234</p>
-      </div>
-      <div class="informacion">
-        <h2>Dr. Juan Perez</h2>
-        <h3>Universidad San Francisco Xavier de Chuquiscaca</h3>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero minus
-          mollitia eius itaque perspiciatis, doloribus quod. Praesentium debitis
-          soluta at mollitia. Id consequatur officiis ea, voluptate fugit
-          numquam quidem adipisci.
-        </p>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas,
-          eos! Ullam, culpa nihil! Totam obcaecati consectetur aut
-          necessitatibus quisquam, numquam et consequuntur odit incidunt dicta
-          exercitationem laboriosam sed eligendi magnam?
-        </p>
-        <a href="#">Mas Inf.</a>
-      </div>
-    </div> -->
+
+    
 
     <script>
       var lista_Medicos = controlMedico.obtenerListaMedicos();
-
+      var lista_Especialidad = controlEspecialidad.obtenerListaEspecialidad();
+      
       var container = document.getElementById("container");
       container.innerHTML = "";
 
-      function card_medicos(listaMedicos) {
-        console.log(lista_Medicos);
-        var html = '';
+      
+          console.log(lista_Especialidad.length);
+
+          for(let i =0; i < lista_Especialidad.length; i++){
+            document.getElementById("especialidad").innerHTML += `<option value="${lista_Especialidad[i].id_espc}">${lista_Especialidad[i].nombreEsp}</option>`;
+          }
+      
+
+      function card_medicos(listaMedicos, listaEspecialidad) {
+
+        // console.log(lista_Especialidad);
+        // console.log(lista_Medicos);
+        var message = document.getElementById("message");
+        message.innerHTML = "";
+        var html = "";
+
+
         listaMedicos.forEach((medico) => {
+          var id = medico.id_especialidad;
+          console.log(id);
+
+          let nombre_especialidad = '';
+          listaEspecialidad.forEach(especialidad => {
+            if (especialidad.id_espc == id) {
+              nombre_especialidad = especialidad.nombreEsp;
+            }
+          });
+
+          // console.log(nombre_especialidad);
+
           html += `
           <div class="card-medico">
       <div class="perfil">
         <img src="../images/${medico.foto}" alt="" />
-        <p id="nombre">${medico.nombre}</p>
-        <p>${medico.apellido}</p>
-        <p>${medico.email}</p>
-        <p>${medico.telefono}</p>
-        <p>${medico.direccion}</p>
+        <h3>INFORMACIÓN DEL CONTACTO</h3>
+        <p>Nombre: ${medico.nombre}</p>
+        <p>Apellido: ${medico.apellido}</p>
+        <p>Correo: ${medico.email}</p>
+        <p>Teléfono: ${medico.telefono}</p>
+        <p>Addres: ${medico.direccion}</p>
       </div>
       <div class="informacion">
-        <h2>Dr. Juna perez</h2>
-        <h3>Universidad San Francisco Xavier de Chuquiscaca</h3>
+        <h2>Dr. ${medico.nombre} ${medico.apellido}</h2>
+        <h3>${medico.educacion}</h3>
         <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero minus
-          mollitia eius itaque perspiciatis, doloribus quod. Praesentium debitis
-          soluta at mollitia. Id consequatur officiis ea, voluptate fugit
-          numquam quidem adipisci.
+          ${medico.descripcion}
+        </p>
+        <h3>Especialidad</h3>
+        <p>
+          ${nombre_especialidad}
         </p>
         <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas,
-          eos! Ullam, culpa nihil! Totam obcaecati consectetur aut
-          necessitatibus quisquam, numquam et consequuntur odit incidunt dicta
-          exercitationem laboriosam sed eligendi magnam?
+          Excelente profesional, médico de calidad altamente preparado, y sobre todas las cosas 
+          un excelente ser humano y amigo. El mejor de los mejores, gracias por su soporte en el 
+          tratamiento de mis amigos y familiares recomendados. Sus consultas y recomendaciones son 
+          siempre acertadas y puntuales.
         </p>
         <a href="#">Mas Inf.</a>
       </div>
@@ -178,29 +130,67 @@
         });
         container.innerHTML = html;
       }
+      
+      function buscar_medico(listaMedicos, listaEspecialidad) {
 
-      function mostrarLista(listaMedicos) {
-        document.getElementById("tabla_medicos").innerHTML =
-          armar_tabla_medicos(listaMedicos);
-        document.getElementById("formulario").innerHTML = "";
-        document.getElementById("formulario").style.backgroundColor = "#f0f0f0";
-        document.getElementById("formulario").style.border =
-          "1px solid #f0f0f0";
-      }
+        var dato_buscar = document.getElementById("dato").value;
+        var message = document.getElementById("message");
 
-      function buscar() {
-        let medicoBuscar = document.getElementById("buscar").value;
+        var select = document.getElementById("especialidad").value;
+        console.log("seleccionaste "+select);
+       
+          // const option = select.options[select.selectedIndex];
+          // // Leer su value
+          // const value = option.value;
+          // console.log(value);
 
-        Ctr_medico.listaMedicos.forEach(function (medico) {
-          if (
-            medico.id == medicoBuscar ||
-            medico.nombre == medicoBuscar ||
-            medico.esperiencia == medicoBuscar
-          ) {
-            let ctrlMedico = new ControlMedico();
-            ctrlMedico.adicionar_Medico(medico);
-            console.log(ctrlMedico.listaMedicos);
-            mostrarLista(ctrlMedico.listaMedicos);
+
+        // console.log(dato_buscar);
+        var medico_encontrado = false;
+
+        listaMedicos.forEach((medico) => {
+          var id_medico = medico.id.toString();
+
+          let nombre_especialidad = '';
+          let seleccionado = '';
+          listaEspecialidad.forEach(especialidad =>{
+            if(especialidad.id_espc == select){
+              seleccionado = especialidad.nombreEsp;
+            }
+
+            if (especialidad.id_espc == medico.id_especialidad) {
+              nombre_especialidad = especialidad.nombreEsp;
+            }
+          })
+
+          if(dato_buscar){
+              switch (dato_buscar) {
+              case id_medico:
+              case medico.nombre:
+              case medico.apellido:
+              case medico.email:
+              case medico.telefono:
+              case nombre_especialidad:
+                card_medicos([medico], listaEspecialidad);
+                medico_encontrado = true;
+                break;
+            }
+          }else{
+            if(seleccionado){
+                switch (seleccionado) {
+                case nombre_especialidad:
+                  card_medicos([medico], listaEspecialidad);
+                  medico_encontrado = true;
+                  break;
+              }
+            }
+          }
+
+          if (medico_encontrado == true) {
+            message.innerHTML = "";
+          } else {
+            message.innerHTML = "No se encontró ningun medico con el dato introducido";
+            container.innerHTML = "";
           }
         });
       }

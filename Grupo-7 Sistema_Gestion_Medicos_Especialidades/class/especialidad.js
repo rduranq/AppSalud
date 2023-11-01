@@ -1,10 +1,10 @@
 class Especialidad{
-    constructor(id_espc, nombreEsp, descripcion, promedioCalificacion, id_medico){
+    constructor(id_espc, nombreEsp, descripcion){
         this.id_espc = id_espc;
         this.nombreEsp = nombreEsp;
         this.descripcion = descripcion;
-        this.promedioCalificacion = promedioCalificacion;
-        this.id_medico = id_medico;
+        // this.promedioCalificacion = promedioCalificacion;
+        // this.id_medico = id_medico;
     }
 }
 
@@ -31,13 +31,13 @@ class ControlEspecialidad{
         return this.listaEspecialidad;
     }
     
-    editar_especialidad(id, nv_nombreEsp, nv_descripcion, nv_promedioCalificacion, nv_id_medico){
+    editar_especialidad(id, nv_nombreEsp, nv_descripcion){
         const especialidadAModificar = this.listaEspecialidad.find((especialidad) => especialidad.id_espc === id);
         if(especialidadAModificar){
             especialidadAModificar.nombreEsp = nv_nombreEsp;
             especialidadAModificar.descripcion = nv_descripcion;
-            especialidadAModificar.promedioCalificacion = nv_promedioCalificacion;
-            especialidadAModificar.id_medico = nv_id_medico;
+            // especialidadAModificar.promedioCalificacion = nv_promedioCalificacion;
+            // especialidadAModificar.id_medico = nv_id_medico;
         }else{
             console.log(`No se encontró una especialidad con el ID ${id}`);
         }
@@ -63,28 +63,31 @@ class ControlEspecialidad{
         }
         return especialidadValida;
     }
+    
+}
 
-    listar_especialidad(){
-        let especialidades = [
-            [0, "Medicina general", "Una especialidad de varias areas", 2],
-            [1, "Salud mental", "Una especialidad enfocada en la salud mental", 3],
-            [2, "Especialidad en Laboratorios", "Una especialidad que realiza Patología, Microbiología", 1],
-            [3, "Medicina del Deporte", "Una especialidad de medicina de deportes", 4],
-            [4, "Especialidad en Pediátricas", "Una especialidad que realiza Cardiología Pediátrica, Nefrología Pediátrica, etc", 4],
-            [5, "Medicina de Urgencias y Cuidados Críticos", "Una especialidad mayormente enfocado en emergencias", 0],
-        ];   
+var controlEspecialidad = new ControlEspecialidad();
 
-        for(let i = 0; i < especialidades.length; i++){
-            let especialidad = new Especialidad(
-                especialidades[i][0],
-                especialidades[i][1],
-                especialidades[i][2],
-                especialidades[i][3],
-                especialidades[i][4],
-                especialidades[i][5]
-            );
+function listar_especialidad(){
+    let especialidades = [
+        [0, "Medicina general", "Una especialidad de varias areas"],
+        [1, "Salud mental", "Una especialidad enfocada en la salud mental"],
+        [2, "Especialidad en Laboratorios", "Una especialidad que realiza Patología, Microbiología"],
+        [3, "Medicina del Deporte", "Una especialidad de medicina de deportes"],
+        [4, "Especialidad en Pediátricas", "Una especialidad que realiza Cardiología Pediátrica, Nefrología Pediátrica, etc"],
+        [5, "Medicina de Urgencias y Cuidados Críticos", "Una especialidad mayormente enfocado en emergencias"],
+    ];   
 
-            this.adicionar_Especialidad(especialidad);
-        }
+    for(let i = 0; i < especialidades.length; i++){
+        let especialidad = new Especialidad(
+            especialidades[i][0],
+            especialidades[i][1],
+            especialidades[i][2],
+        );
+
+        // this.adicionar_Especialidad(especialidad);
+        controlEspecialidad.adicionar_Especialidad(especialidad);
     }
 }
+
+listar_especialidad();

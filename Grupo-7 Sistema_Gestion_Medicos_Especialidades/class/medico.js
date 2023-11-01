@@ -86,12 +86,18 @@ class ControlMedico{
 var controlMedico = new ControlMedico();
 function listar_medicos(){
     let medicos = [
-        [0, "juan.jpg", "Juan", "Perez",72732323, "juanito@gmail.com", "123", "Cofundador, socio, y Global Business Development Manager MD con MBA, especializado en nuevos negocios e innovación en el área de la salud. Tiene experiencia en compañías aseguradoras, así como en gestión clínica y sanitaria, y está interesado en el turismo médico, la innovación en dispositivos médicos, y nuevos servicios TIC de salud Cofundador de la startup Doctoralia, ahora parte del Grupo Docplanner, la plataforma líder global que pone en contacto a pacientes y especialistas. Además, asesora otros proyectos digitales desde Barcelona Health Hub con Braincats Consulting, como el e-commerce médico Clinicpoint, el servicio de IA Universal Customer, o el servicio de telemedicina y control de pacientes crónicos Doctivi", "USFX", "Calle Loa Nr: 122", "10:00am a 12:00pm", 1],
-        [1, "foto", "Pedro", "Castro",65434342, "pedro@gmail.com", "1a2", "Radioterapia", "USFX", "Calle Loa Nr: 122", "10:00am a 12:00pm", 1],
-        [2, "lucas.png", "Lucas", "Martinez", 75633232, "lucas@gmail.com", "afed", "Radioterapia", "USFX", "Calle Loa Nr: 122", "10:00am a 12:00pm", 1],
-        [3, "foto", "Margarita", "Flores", 673346323, "margarita@gmail.com", "120fr3", "Radioterapia", "USFX", "Calle Loa Nr: 122", "10:00am a 12:00pm", 1],
-        [4, " Fotos", "Elena", "Rios", 76374343, "elena@gmail.com", "dewf", "Radioterapia", "USFX", "Calle Loa Nr: 122", "10:00am a 12:00pm", 1],
-        [5, "foto", "Franz", "Gonzales", 74734923, "franz@gmail.com", "12sasd", "Radioterapia", "USFX", "Calle Loa Nr: 122", "10:00am a 12:00pm", 1]
+        [0, "juan.jpg", "Juan", "Perez", 72732323, "juanito@gmail.com", "123", "De educación católica Jesuita realizó sus estudios primarios y secundarios en la escuela y colegio Cristo Rey de la ciudad de Portoviejo.", 
+        "Universidad de USFX.", "Calle Brazil N# 231.", "08:00am - 12:00pm", 1],
+        [1, "pedro.jpg", "Pedro", "Castro", 65434342, "pedro@gmail.com", "1a2", "De educación católica Jesuita realizó sus estudios primarios y secundarios en la escuela y colegio Cristo Rey de la ciudad de Portoviejo.", 
+        "Universidad Domingo Savio.", "Calle Loa Nr: 122", "10:00am a 12:00pm", 1],
+        [2, "lucas.png", "Lucas", "Martinez", 75633232, "lucas@gmail.com", "afed", "De educación católica Jesuita realizó sus estudios primarios y secundarios en la escuela y colegio Cristo Rey de la ciudad de Portoviejo.", 
+        "Universidad de USFX.", "Av. las Americas Nr: 122", "14:00pm a 18:00pm", 4],
+        [3, "andres.jpg", "Andres", "Flores", 673346323, "andres@gmail.com", "120fr3", "De educación católica Jesuita realizó sus estudios primarios y secundarios en la escuela y colegio Cristo Rey de la ciudad de Portoviejo.", 
+        "Universidad Domingo Savio.", "Calle Junin Nr: 122", "07:00am a 11:00pm", 2],
+        [4, "jhonny.jpg", "Jhonny", "Rios", 76374343, "jhonny@gmail.com", "dewf", "De educación católica Jesuita realizó sus estudios primarios y secundarios en la escuela y colegio Cristo Rey de la ciudad de Portoviejo.", 
+        "Universidad de USFX.", "Av. 6 de Agosto: 122", "14:00pm a 20:00pm", 5],
+        [5, "franz.jpg", "Franz", "Gonzales", 74734923, "franz@gmail.com", "12sasd", "De educación católica Jesuita realizó sus estudios primarios y secundarios en la escuela y colegio Cristo Rey de la ciudad de Portoviejo.", 
+        "Universidad Domingo Savio.", "Zona Alto Sucre", "08:00am a 21:00pm", 3]
     ];
 
     for (let i = 0; i < medicos.length; i++) {
@@ -101,12 +107,16 @@ function listar_medicos(){
             medicos[i][2],
             medicos[i][3],
             medicos[i][4],
-            medicos[i][5]
+            medicos[i][5],
+            medicos[i][6],
+            medicos[i][7],
+            medicos[i][8],
+            medicos[i][9],
+            medicos[i][10],
+            medicos[i][11]
 
         );
-
-        // this.listaMedicos.push(medico);
-        // this.adicionar_Medico(medico);
+        
         controlMedico.adicionar_Medico(medico);
     }
 
