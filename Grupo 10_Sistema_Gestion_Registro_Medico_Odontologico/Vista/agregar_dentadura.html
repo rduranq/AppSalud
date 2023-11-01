@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="estilos_paginas.css">
+</head>
+
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="#">Clínica Dental</a>
+            </div>
+            <ul class="menu">
+                <li><a href="Gestionar_pacientes.html">Inicio</a></li>
+                <li><a href="#">Servicios</a></li>
+                <li><a href="#">Equipo</a></li>
+                <li><a href="#">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+
+    <div class="contenedor-agr">
+        <div class="input-container">
+            <h1 class="titulo-pagina1">Agregar descripcion del diente</h1>
+            <label for="numero_diente">Numero de Diente:</label>
+            <input type="number" id="numero_diente" name="numero_diente"><br>
+            <label for="diente">Diente:</label>
+            <input type="text" id="diente" name="diente"><br>
+            <label for="estado">Tratamiento:</label>
+            <input type="text" id="estado" name="estado"><br>
+            <button id="btnGuardar" class="custom-button">Guardar descripcion</button><br><br>
+        </div>
+        <div class="imagen-agr">
+            <img src="imagenes/dentadura paciente.jpg" width="650px" height="500px" alt="">
+        </div>
+    </div>
+    <script>
+        // Botón para guardar una nueva entrada
+        document.getElementById("btnGuardar").addEventListener("click", function () {
+            // Obtén los valores del diente y estado del formulario
+            const nuevoDiente = document.getElementById("diente").value;
+            const nuevoEstado = document.getElementById("estado").value;
+
+            // Redirige de vuelta a la página "tabla.html" y pasa los datos como parámetros en la URL
+            window.location.href = `Gestionar_dentadura.html`;
+        });
+    </script>
+</body>
+
+</html>
