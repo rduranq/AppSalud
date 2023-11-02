@@ -243,33 +243,9 @@
             <p>No existe registros que mostrar</p>
         <?php } ?>
         </div>
-        <form id="formHistorial" action="#" method="POST">
-            <!-- Fecha de la visita -->
-            <label for="visit_date">Fecha de consulta:</label>
-            <input type="date" name="visit_date" required>
 
-            <label for="disease">Enfermedad:</label>
-            <input type="text" name="disease" required>
+<!--Aquí realiza los cambios del formulario-->
 
-            <!-- Nombre del medicamento -->
-            <label for="medicine_name">Nombre del Medicamento:</label>
-            <select name="medicine_name" required>
-                <option value="Amoxicillin">Amoxicillin</option>
-                <!-- ... otras opciones ... -->
-            </select>
-
-            <label for="packing">Cantidad por Empaque:</label>
-            <input type="number" name="packing" required>
-
-            <label for="quantity">Cantidad:</label>
-            <input type="number" name="quantity" required>
-
-            <label for="dosage">Dosis:</label>
-            <input type="number" name="dosage" required>
-
-            <button id="registrarHistorial" type="submit"><a class="page-link" href="javascript:registrarHistorialMedico()">Registrar Historial</a></button>
-            
-        </form>
 </body>
 
 </html>
