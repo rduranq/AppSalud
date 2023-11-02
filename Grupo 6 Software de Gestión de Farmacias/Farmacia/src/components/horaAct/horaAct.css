@@ -1,0 +1,11 @@
+.hora{
+    font-size: 30px;
+}
+.fecha{
+    font-size: 50px;
+}
+.time{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}

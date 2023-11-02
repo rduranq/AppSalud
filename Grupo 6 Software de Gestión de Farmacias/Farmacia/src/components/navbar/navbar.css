@@ -1,0 +1,66 @@
+/* navbar.css */
+.navbar {
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+    color: #323130;
+    padding: 30px;
+    justify-content: space-between;
+    width: 250px;
+    border-radius: 20px;
+    font-weight: bold;
+  }
+  .titulo{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    text-align: center;
+  }
+  .button {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    gap: 50px;
+    background-color: #FFFFFF;
+    color: #323130;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s; /* Transición para cambios de color de fondo */
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    align-items: center;
+  }
+  
+  .button:hover {
+    background-color: #323130;
+    color: white; /* Cambia el color de fondo al pasar el mouse por encima */
+  }
+  
+  .button:active {
+    background-color: #151414; /* Cambia el color de fondo al presionar el botón */
+  }
+  
+.bold-text {
+    font-weight: bold;
+  }
+.centered-text{
+    text-align: center; /* Alinea el texto al centro */
+}
+.tiempo{
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+}
+.componentes{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+}
+.bordered-button{
+    border: 1px solid #323130;
+}

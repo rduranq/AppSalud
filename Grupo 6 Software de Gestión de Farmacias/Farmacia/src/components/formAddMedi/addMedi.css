@@ -1,0 +1,70 @@
+.form-container-medi{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 30px;
+    width: 98%;
+}
+.tittle-add{
+    background-color: #323130;
+    font-size: 30px;
+    border-radius: 30px;
+    text-align: center;
+    color: white;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+.news-form-medi{
+    
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 5px;
+    border: 1px solid black;
+    height: 90%;
+    background-color: #B0E7BC;
+    padding: 15px;
+    border-radius: 30px;
+}
+.news-form-medi input{
+    font-size: 15px;
+    background-color: white;
+    border-radius: 5px;
+    height: 15px;
+}
+
+.news-form-medi input[type="date"]{
+    text-align: center;
+    height: 10px;
+}
+
+.news-form-medi select{
+    background-color: white;
+    border-radius: 5px;
+    height: 30px;
+    text-align: center;
+}
+.news-form-medi label{
+    font-size: 13px;
+    font-weight: bold;
+    color: black;
+    text-align: center;
+    margin: auto 0;
+}
+.button-medi {
+    background-color: #323130;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    height: 45px;
+    font-size: 10px;
+    text-align: center;
+    margin: auto 0 ;
+    font-weight: bold;
+    font-style: normal;
+    width: 150px;
+}
+.button-medi:hover {
+    background-color: #141414;
+}

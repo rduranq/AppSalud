@@ -1,0 +1,157 @@
+.form-container{
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    background-color: #B0E7BC;
+    border-radius: 10px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    border: 1px solid black;
+    margin: auto;
+
+}
+.input_venta {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+
+    width: 120px;
+    border: none;
+
+    background-color: white;
+    border-radius: 5px;
+
+    border-bottom: 3px solid #828282;
+    font-size: 15px;
+    font-weight: bold;
+    font-style: normal;
+    
+    
+}
+
+
+.button-venta {
+    background-color: #323130;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    height: 45px;
+    font-size: 15px;
+    text-align: center;
+    font-weight: bold;
+    font-style: normal;
+    width: 200px;
+
+    
+}
+.button-venta:hover {
+    background-color: #141414;
+}
+
+.form-group_1{
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content:center;
+    gap: 20px;
+
+}
+.form-group_2{
+    display: flex;
+    flex-direction: row;
+    justify-content:space-evenly;
+    align-items: center;
+    text-align: center;
+    gap: 50px;
+
+}
+.input-content{
+    
+    display: flex;
+    flex-direction: row;
+    justify-content:center;
+    height: 60px;
+    text-align: center;
+    align-items: center;
+    gap: 10px;
+}
+.back-menu{
+    background-color: #323130;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100px;
+    height: 40px;
+    font-size: 15px;
+    text-align: center;
+    font-weight: bold;
+    font-style: normal;
+
+}
+.back-menu a:link,
+.back-menu a:visited {
+    text-decoration: none;
+    color: #ffffff;
+}
+.back-menu:hover {
+    background-color: #141414;
+}
+
+.buttons-venta{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    gap: 50px;
+}
+.content-ventas{
+    width: 90%;
+    margin: auto;
+    background-color: transparent;
+    height: 300px;
+    border-radius: 30px;
+}
+.content-total{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+
+    align-items: center;
+    align-content: center;
+    justify-content: space-around;
+
+    align-items: center;
+    border-radius: 30px;
+
+}
+.input_totalLetras {
+    width: 700px;
+    border: none;
+
+
+    color: #323130;
+    border-bottom: 3px solid #828282;
+    font-size: 15px;
+    font-weight: bold;
+    font-style: normal;
+    background-color: white;
+    border-radius: 5px;
+    
+}
+.texto {
+    width: 100%;
+
+    resize: none;
+    border-radius: 20px;
+    padding: 20px;
+    font-size: 15px;
+    font-weight: bold;
+    font-style: normal;
+  }

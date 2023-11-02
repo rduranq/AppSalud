@@ -1,0 +1,32 @@
+.table-venta {
+    width: 90%;
+    border-collapse: collapse;
+    border: 1px solid #ccc;
+    margin-top: 20px;
+    text-align: center;
+    margin: auto;
+}
+
+/* Estilos para las celdas de encabezado */
+.table-venta  th {
+    background-color: #323130;
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: left;
+    color: white;
+}
+
+/* Estilos para las celdas de datos */
+.table-venta  td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    background-color: white;
+    
+
+}
+
+/* Estilos para las filas impares */
+.table-venta  tr:nth-child(odd) {
+    background-color: #f9f9f9;
+   
+}
