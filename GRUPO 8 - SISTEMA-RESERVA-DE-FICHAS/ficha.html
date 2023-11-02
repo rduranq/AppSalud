@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Datos Ficha Emitida</title>
+</head>
+<body>
+    <h1>Datos Ficha Emitida</h1>
+
+    <p>Paciente: <span id="paciente">Nombre del Paciente</span></p>
+    <p>Médico: <span id="medico">Nombre del Médico</span></p>
+    <p>Especialidad: <span id="especialidad">Especialidad</span></p>
+    <p>Dirección: DTT11 Nro 426</p>
+    <p>Hora de Presentación: <span id="horaPresentacion">Fecha y Hora</span></p>
+    <p>Nro de Ficha: <span id="nroFicha">Nro de Ficha</span></p>
+
+    <button onclick="imprimirFicha()">IMPRIMIR</button>
+    <button onclick="salir()">SALIR</button>
+
+    <script>
+       // Recuperar datos almacenados en sessionStorage
+const especialidad = sessionStorage.getItem('especialidad');
+const fecha = sessionStorage.getItem('dia');
+const nroFicha = sessionStorage.getItem('nroFicha');
+
+// Asignar los valores recuperados a los campos correspondiente
+document.getElementById('especialidad').textContent = especialidad;
+document.getElementById('horaPresentacion').textContent = fecha;
+document.getElementById('nroFicha').textContent = nroFicha;
+
+       
+
+        function imprimirFicha() {
+        
+            alert('Ficha impresa.');
+        }
+
+        function salir() {
+        
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>
