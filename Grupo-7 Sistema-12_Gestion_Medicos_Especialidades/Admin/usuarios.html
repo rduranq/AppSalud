@@ -80,8 +80,8 @@
 
           <div class="buscar">
             <label for="dato">Buscar</label>
-            <input type="text" id="dato" />
-            <button class="button" onclick="buscar_usuario()">Buscar</button>
+            <input type="text" id="dato-medico" />
+            <button class="button" onclick="buscar_medico()">Buscar</button>
           </div>
         </header>`;
 
@@ -374,8 +374,6 @@
 
 
 
-
-
       function buscar_usuario() {
         var dato_buscar = document.getElementById("dato").value;
         var message = document.getElementById("message");
@@ -409,6 +407,37 @@
 
 
 
+
+      function buscar_medico() {
+        var dato_buscar = document.getElementById("dato-medico").value;
+        var message = document.getElementById("message");
+
+        console.log(dato_buscar);
+
+        var medico_encontrado = false;
+
+        lista_medicos.forEach((medico) => {
+          var id_medico = medico.id.toString();
+
+          switch (dato_buscar) {
+            case id_medico:
+            case medico.nombre:
+            case medico.apellido:
+            case medico.email:
+            case medico.direccion:
+              armar_tabla_medicos([medico]);
+              medico_encontrado = true;
+              break;
+          }
+
+          if (medico_encontrado == true) {
+            message.innerHTML = "";
+          } else {
+            message.innerHTML = "No se encontró ningun medico con el dato introducido";
+            container.innerHTML = "";
+          }
+        });
+      }
 
 
 
