@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <script src="usuario.js"></script>
+    <script src="../class/especialidad.js"></script>
+    <script src="../class/medico.js"></script>
     <link rel="stylesheet" href="./usuarios.css" />
   </head>
 
@@ -13,8 +15,39 @@
       <div class="datos">
         <p>ADMINISTRADOR</p>
       </div>
+      <header class="header" id="header">
+        <button class="button" onclick="gestionar_usuarios()">
+          Gestion de Usuarios
+        </button>
+        <button class="button" onclick="gestionar_medicos()">
+          Gestion de Medicos
+        </button>
+        <button class="button" onclick="gestionar_especialidad()">
+          Gestion de Especialidad
+        </button>
+      </header>
 
-      <header class="header">
+     
+
+      <p id="message"></p>
+
+      <div class="container" id="container"></div>
+    </div>
+
+    <script>
+      var lista_usuarios = controlUsuario.obtenerListaUsuarios();
+      var lista_especialidad = controlEspecialidad.obtenerListaEspecialidad();
+     
+      var lista_medicos = controlMedico.obtenerListaMedicos();
+
+
+      var container = document.getElementById("container");
+      container.innerHTML = "";
+
+      function gestionar_usuarios() {
+        document.getElementById("header").innerHTML = "";
+        let html = `
+        <header class="header2">
         <button class="button" onclick="armar_tabla_usuarios(lista_usuarios)">
           Lista Usuarios
         </button>
@@ -27,18 +60,58 @@
           <input type="text" id="dato" />
           <button class="button" onclick="buscar_usuario()">Buscar</button>
         </div>
-      </header>
-      <p id="message"></p>
+      </header>`;
 
-      
-      <div class="container" id="container"></div>
-    </div>
+        document.getElementById("header").innerHTML = html;
+      }
 
-    <script>
-      var lista_usuarios = controlUsuario.obtenerListaUsuarios();
+      function gestionar_medicos() {
+        document.getElementById("header").innerHTML = "";
+        let html = `
+          <header class="header2">
+          <button class="button" onclick="armar_tabla_medicos(lista_medicos, lista_especialidad)">
+            Lista Medicos
+          </button>
+          <button class="button" onclick="mostrar_formUsuario()">
+            Agregar Medicos
+          </button>
 
-      var container = document.getElementById("container");
-      container.innerHTML = "";
+          <div class="buscar">
+            <label for="dato">Buscar</label>
+            <input type="text" id="dato" />
+            <button class="button" onclick="buscar_usuario()">Buscar</button>
+          </div>
+        </header>`;
+
+        document.getElementById("header").innerHTML = html;
+      }
+
+      function gestionar_especialidad() {
+        document.getElementById("header").innerHTML = "";
+        let html = `
+          <header class="header2">
+          <button class="button" onclick="armar_tabla_usuarios(lista_usuarios)">
+            Lista Especialidad
+          </button>
+          <button class="button" onclick="mostrar_formUsuario()">
+            Agregar Especialidad
+          </button>
+
+          <div class="buscar">
+            <label for="dato">Buscar</label>
+            <input type="text" id="dato" />
+            <button class="button" onclick="buscar_usuario()">Buscar</button>
+          </div>
+        </header>`;
+
+        document.getElementById("header").innerHTML = html;
+      }
+
+
+
+
+
+
 
       function armar_tabla_usuarios(usuarios) {
         // var container = document.getElementById("container");
@@ -78,6 +151,69 @@
       </div>`;
         container.innerHTML = html;
       }
+
+
+
+
+
+      function armar_tabla_medicos(medicos, especialidades) {
+        // var container = document.getElementById("container");
+      
+        console.log(especialidades);
+        let html =
+          `<div id="tabla_usuarios">` +
+          `<table>` +
+          `<thead>
+            <tr>  
+              <th>Fotografia</th>
+              <th>ID</th>
+              <th>Nombre</th>
+              <th>Apellido</th>
+              <th>Telefono</th>
+              <th>Email</th>
+              <th>Especialidad</th>
+              <th>Operaciones</th>
+            </tr>
+          </thead>
+          <tbody>`;
+           
+        medicos.forEach(function (medico) {
+          
+          var especialidad;
+          especialidades.forEach(function(especialidad){
+
+            if(medico.id_especialidad == especialidad.id_espc){
+              especialidad=especialidad.nombreEsp;
+              console.log(especialidad);
+            }
+
+          })
+       
+
+
+
+          html += `<tr>
+                <td><img src="../images/andres.jpg" alt=""></td>
+                <td>${medico.id}</td>
+                <td>${medico.nombre}</td>
+                <td>${medico.apellido}</td>
+                <td>${medico.telefono}</td>
+                <td>${medico.email}</td>
+                <td>${especialidad} </td>
+                
+                <td>
+                  <button data-action="editar" onclick="formEditmedico(${medico.id});">Editar</button>
+                  <button data-action="eliminar" onclick="controlmedico.eliminar_medico(${medico.id}); 
+                  armar_tabla_medico(lista_medicos)">Eliminar</button>
+                </td>
+              </tr>`;
+        });
+        html += `</tbody>
+        </table>
+      </div>`;
+        container.innerHTML = html;
+      }
+
 
       function registrar_NuevoUsuario() {
         event.preventDefault();
@@ -166,7 +302,8 @@
           if (usuario_encontrado == true) {
             message.innerHTML = "";
           } else {
-            message.innerHTML = "No se encontró ningun usuario con el dato introducido";
+            message.innerHTML =
+              "No se encontró ningun usuario con el dato introducido";
             container.innerHTML = "";
           }
         });
@@ -179,9 +316,9 @@
         var rolmedico = usuario.rol;
 
         if (rolmedico == "Admin") {
-            rolmedico = "Usuario";
+          rolmedico = "Usuario";
         } else {
-            rolmedico = "Admin";
+          rolmedico = "Admin";
         }
 
         var html_formUsuario = `
@@ -223,7 +360,9 @@
         var rol = document.getElementById("rol").value;
 
         console.log(nombre);
-        var usuarioEncontrado = listaUsuarios.find((medico) => medico.id == idmedico);
+        var usuarioEncontrado = listaUsuarios.find(
+          (medico) => medico.id == idmedico
+        );
         // console.log(usuarioEncontrado);
 
         usuarioEncontrado.nombre = nombre;
