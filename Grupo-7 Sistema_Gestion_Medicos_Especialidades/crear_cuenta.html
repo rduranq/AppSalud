@@ -93,6 +93,7 @@
         </div>
     </main>
     <script>
+        //cambio para visualizar campos de médico
         const select = document.getElementById('tipoUsuario');
         const camposMedico = document.getElementById('camposMedico');
         select.addEventListener('change', () => {
@@ -102,9 +103,10 @@
                 camposMedico.style.display = 'none';
             }
         });
-
         const form = document.getElementById('crear_cuenta_form');
 
+
+        //función para crearusuario
         function crearusuario() {
             const formulario = new FormData(form);
             const datos = Object.fromEntries(formulario.entries())
@@ -150,7 +152,7 @@
                 controlMedico.adicionar_Medico(nuevoMedico);
                 console.log(controlMedico)
             }
-            
+            window.location.href = 'inicio.html';
         }
 
 
