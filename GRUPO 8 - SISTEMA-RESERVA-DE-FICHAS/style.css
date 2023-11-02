@@ -1,0 +1,123 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+    text-decoration: none;
+    list-style: none;
+    color: #24252a;
+}
+
+body {
+    height: 100vh;
+    background-color: #a9aaac;
+    color: black;
+}
+
+nav {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ffff;
+    padding-left: 2vw;
+}
+
+.cont-ul {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+li {
+    list-style: none;
+    cursor: pointer;
+    padding: 1.5vw;
+    transition:  all .3s ease 0s;
+    color: #24252a;
+}
+
+li:hover {
+    background-color: #22266e;
+    color: white;
+}
+
+.publicaciones {
+    position: relative;
+}
+
+.ul-second {
+    display: none;
+    position: absolute;
+    margin-top: 1.5vw;
+}
+
+.ul-second > li {
+    width: 190px;
+    transform: translateX(-20px);
+    border-bottom:solid 1px #fff ;
+    text-align: center;
+    background-color: #ffff;
+}
+
+.ul-second > li:hover {
+    background-color: #22266e;
+    color: white;
+}
+
+.publicaciones:hover > .ul-second {
+    display: block;
+}
+
+@media (max-width:900px) {
+    .logo-danicodex {
+        display: none;
+    }
+}
+
+/*ESTILOS PARA GESTION HORARIO*/
+/* Estilo para el contenedor principal */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Esto centra verticalmente en la página */
+}
+
+/* Estilo para el formulario */
+#fichaMedicaForm {
+    padding: 20px;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    background-color: #f7f7f7;
+    max-width: 600px; /* Aumenta el ancho del formulario */
+    margin: 100px; /* Agrega margen alrededor del formulario */
+}
+
+/* Estilo para los encabezados */
+h1, h2 {
+    text-align: center;
+}
+
+/* Estilo para la tabla */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+/* Estilo para las celdas de la tabla */
+table, th, td {
+    border: 1px solid #999;
+}
+
+/* Estilo para los botones */
+button {
+    display: block;
+    margin: 20px auto;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
