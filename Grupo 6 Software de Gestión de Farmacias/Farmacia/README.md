@@ -29,4 +29,7 @@ Garcia Torricos Ismael Derick
 
 
 
-Polo Orellana Brayan Simon Diego Roberto Arancibia Delgado Fernández Cabrera Luigi Alejandro Garcia Torricos Ismael Derick
+Polo Orellana Brayan Simon 
+Diego Roberto Arancibia Delgado 
+Fernández Cabrera Luigi Alejandro 
+Garcia Torricos Ismael Derick
