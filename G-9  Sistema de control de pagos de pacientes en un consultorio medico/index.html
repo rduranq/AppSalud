@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AppMedical</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bungee+Spice&family=Noto+Serif:ital,wght@1,900&family=Open+Sans:wght@600;800&display=swap"
+        rel="stylesheet">
+    <style>
+        .background-image {
+            background-image: url('sistemas2.jpg');
+            background-size: cover;
+
+            background-position: center center;
+
+            background-attachment: fixed;
+
+            background-repeat: no-repeat;
+        }
+
+        .sidebar {
+            font-family: 'Noto Serif', serif;
+            font-family: 'Open Sans';
+            height: 100%;
+            width: 250px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: rgb(9, 128, 122);
+
+            padding-top: 20px;
+        }
+
+        .sidebar a {
+            padding: 8px 8px 8px 16px;
+            text-decoration: none;
+            font-size: 18px;
+            color: white;
+            display: block;
+        }
+
+        .sidebar a:hover {
+            background-color: rgb(132, 145, 223);
+        }
+
+        .content {
+            font-family: 'Noto Serif', serif;
+            margin-left: 260px;
+            padding: 20px;
+        }
+
+        #titulo-sistema {
+            font-size: 44px;
+        }
+    </style>
+</head>
+
+<body class="background-image">
+    <div class="sidebar">
+        <a href="" id="titulo-sistema">SISTEMA DE PAGOS</a>
+        <a href="registro_pago.html" id="cargar-registro-pago">Registrar Pago</a>
+        <a href="gestionarpaciente.html" id="cargar-gestion-paciente">Gestionar Paciente</a>
+        <a href="gestionarmedico.html" id="cargar-gestion-medico">Gestionar Médicos</a>
+    </div>
+    <div class="content">
+        <div id="contenido-pagos" class="container mt-4"></div>
+    </div>
+    <div id="contenido-cargado" class="container mt-4"></div>
+    <div id="contenido-cargadomedico" class="container mt-4"></div>
+
+    <script>
+        $(document).ready(function () {
+            $("#cargar-registro-pago").click(function (event) {
+                event.preventDefault();
+                $.ajax({
+                    url: 'registro_pago.html',
+                    type: 'GET',
+                    success: function (data) {
+                        $("#contenido-cargado").html(data);
+                    },
+                    error: function () {
+                        alert("No se pudo cargar la página de registro de pago.");
+                    }
+                });
+            });
+
+
+
+            $("#cargar-gestion-paciente").click(function (event) {
+                event.preventDefault();
+                $.ajax({
+                    url: 'gestionarpaciente.html',
+                    type: 'GET',
+                    success: function (data) {
+                        $("#contenido-cargado").html(data);
+                    },
+                    error: function () {
+                        alert("No se pudo cargar la página de Gestionar Paciente.");
+                    }
+                });
+            });
+
+            $("#cargar-gestion-medico").click(function (event) {
+                event.preventDefault();
+                $.ajax({
+                    url: 'gestionarmedico.html',
+                    type: 'GET',
+                    success: function (data) {
+                        $("#contenido-cargadomedico").html(data);
+                    },
+                    error: function () {
+                        alert("No se pudo cargar la página de Gestionar Médicos.");
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+
+</html>

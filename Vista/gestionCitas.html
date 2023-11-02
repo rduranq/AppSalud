@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+  <link rel="stylesheet" href="css/estilo.css" />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <title>Programar Cita Médica</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="#">AppMedical</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              id="gestionDropdown"
+              role="button"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              Gestionar
+            </a>
+            <div class="dropdown-menu" aria-labelledby="gestionDropdown">
+              <a class="dropdown-item" href=".\gestionUsuarios.html"
+                >Gestionar Usuarios</a
+              >
+              <a class="dropdown-item" href=".\gestionMedicos.html"
+                >Gestionar Médicos</a
+              >
+              <a class="dropdown-item" href=".\gestionPacientes.html"
+                >Gestionar Pacientes</a
+              >
+              <a class="dropdown-item" href=".\gestionCitas.html"
+                >Gestionar Citas</a
+              >
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              id="registraDropdown"
+              role="button"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              Registrar
+            </a>
+            <div class="dropdown-menu" aria-labelledby="gestionDropdown">
+              <a class="dropdown-item" href="#">Registrar Cita Medica</a>
+              <a class="dropdown-item" href="#">Registrar Historia</a>
+              <a class="dropdown-item" href="#">Asignar Medico</a>
+              <a class="dropdown-item" href="#">Registrar Pago</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <h1>Programar Cita Médica</h1>
+
+    <form id="citaForm">
+      <label for="nombre">Nombre del paciente:</label>
+      <input type="text" id="nombre" required />
+
+      <label for="fecha">Fecha de la cita:</label>
+      <input type="date" id="fecha" required />
+
+      <label for="medico">Médico:</label>
+      <select id="medico">
+        <option value="Dr. López">Dr. López</option>
+        <option value="Dra. Smith">Dra. Smith</option>
+        <option value="Dr. Pérez">Dr. Pérez</option>
+        <option value="Dra. García">Dra. García</option>
+      </select>
+
+      <h2>Calendario de Horarios</h2>
+      <table id="horarios">
+        <tr>
+          <th>Hora</th>
+          <th>Lunes</th>
+          <th>Martes</th>
+          <th>Miércoles</th>
+          <th>Jueves</th>
+          <th>Viernes</th>
+        </tr>
+      </table>
+
+      <button type="button" id="agregarCita">Agendar Cita</button>
+    </form>
+
+    <h2>Citas Agendadas</h2>
+    <ul id="citasList"></ul>
+
+    <button type="button" id="mostrarCitas">Mostrar Citas</button>
+    <div id="citasPorDia"></div>
+    <footer>
+      <h3>Integrantes: GRUPO 2 <b>Sistema de Citas Médicas en Línea</b></h3>
+      <p>
+        <span>Rojas Arroyo Luis Fernando</span><br />
+        <span>Nava Siñani Kelvin Jherman</span><br />
+        <span>Rojas Chavez Samuel</span>
+      </p>
+    </footer>
+    <script>
+      var citas = [];
+
+      function agregarCita() {
+        var nombre = document.getElementById("nombre").value;
+        var fecha = document.getElementById("fecha").value;
+        var medico = document.getElementById("medico").value;
+        var horaSeleccionada = document.querySelector(
+          'input[name="hora"]:checked'
+        );
+
+        if (!horaSeleccionada) {
+          alert("Por favor, selecciona un horario disponible.");
+          return;
+        }
+
+        var hora = horaSeleccionada.value;
+        var diaSeleccionado = horaSeleccionada.dataset.dia;
+
+        var cita = {
+          nombre: nombre,
+          fecha: fecha,
+          medico: medico,
+          hora: hora,
+          dia: diaSeleccionado,
+        };
+
+        citas.push(cita);
+
+        var citasList = document.getElementById("citasList");
+        var listItem = document.createElement("li");
+        listItem.textContent =
+          cita.nombre +
+          " - " +
+          cita.fecha +
+          " - " +
+          cita.dia +
+          " - " +
+          cita.hora +
+          " - " +
+          cita.medico;
+        citasList.appendChild(listItem);
+
+        horaSeleccionada.disabled = true;
+        horaSeleccionada.classList.remove("available");
+        horaSeleccionada.classList.add("unavailable");
+        horaSeleccionada.classList.remove("selected");
+      }
+
+      function mostrarCitasPorDia() {
+        var fechaSeleccionada = document.getElementById("fecha").value;
+        var citasPorDia = document.getElementById("citasPorDia");
+        citasPorDia.innerHTML =
+          "<h2>Citas Programadas para el " + fechaSeleccionada + "</h2>";
+
+        var citasParaMostrar = citas.filter(function (cita) {
+          return cita.fecha === fechaSeleccionada;
+        });
+
+        if (citasParaMostrar.length > 0) {
+          var listaCitas = document.createElement("ul");
+
+          citasParaMostrar.forEach(function (cita) {
+            var listItem = document.createElement("li");
+            listItem.textContent =
+              cita.nombre +
+              " - " +
+              cita.dia +
+              " - " +
+              cita.hora +
+              " - " +
+              cita.medico;
+            listaCitas.appendChild(listItem);
+          });
+
+          citasPorDia.appendChild(listaCitas);
+        } else {
+          citasPorDia.innerHTML +=
+            "<p>No hay citas programadas para esta fecha.</p>";
+        }
+      }
+
+      function seleccionarHorario() {
+        var horariosSeleccionados = document.querySelectorAll(
+          'input[name="hora"]:checked'
+        );
+
+        horariosSeleccionados.forEach(function (horaSeleccionada) {
+          horaSeleccionada.classList.remove("available");
+          horaSeleccionada.classList.add("selected");
+          horaSeleccionada.disabled = true;
+        });
+      }
+
+      document
+        .getElementById("agregarCita")
+        .addEventListener("click", function () {
+          agregarCita();
+          seleccionarHorario();
+        });
+
+      document
+        .getElementById("mostrarCitas")
+        .addEventListener("click", mostrarCitasPorDia);
+
+      var horariosTable = document.getElementById("horarios");
+      var diasSemana = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes"];
+
+      for (var hora = 9; hora <= 17; hora++) {
+        var row = horariosTable.insertRow();
+        var horaCell = row.insertCell(0);
+        horaCell.innerHTML = hora + ":00";
+
+        for (var dia = 0; dia < 5; dia++) {
+          var disponibilidadCell = row.insertCell(dia + 1);
+          var radioInput = document.createElement("input");
+          radioInput.type = "radio";
+          radioInput.name = "hora";
+          radioInput.value = hora + ":00";
+          radioInput.dataset.dia = diasSemana[dia];
+          radioInput.classList.add("available");
+          disponibilidadCell.appendChild(radioInput);
+        }
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/Styles/estilos.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="/Modelo/dentaduras.js"></script>
+    <script src="/Control/controlDentadura.js"></script>
+</head>
+<body>
+    <!--Barra de navegacion-->
+    <div id="navbar-placeholder"></div>
+
+    <div class="title"><h1>Gestionar Dentadura</h1></div>
+
+    <div id="contenido" class="container">
+        <table class="modern-table">
+            <thead>
+                <tr>
+                    <th>Perfil</th>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Cuenta</th>
+                    <th>Tomografia</th>
+                </tr>
+                <tbody id="lista-nombre"></tbody>
+            </thead>
+            <thead>
+                <tr>
+                    <th>1L</th>
+                    <th>2L</th>
+                    <th>3L</th>
+                    <th>4L</th>
+                    <th>5L</th>
+                    <th>6L</th>
+                    <th>7L</th>
+                    <th>8L</th >
+                </tr>
+            </thead>
+                <tbody id="lista-dentadura1"></tbody>
+            <thead>
+                <tr>
+                    <th>1D</th>
+                    <th>2D</th>
+                    <th>3D</th>
+                    <th>4D</th>
+                    <th>5D</th>
+                    <th>6D</th>
+                    <th>7D</th>
+                    <th>8D</th >
+                </tr>
+            </thead>
+                <tbody id="lista-dentadura2"></tbody>
+            <thead>
+                <tr>
+                    <th>1LI</th>
+                    <th>2LI</th>
+                    <th>3LI</th>
+                    <th>4LI</th>
+                    <th>5LI</th>
+                    <th>6LI</th>
+                    <th>7LI</th>
+                    <th>8LI</th >
+                </tr>
+            </thead>
+                <tbody id="lista-dentadura3"></tbody>
+            <thead>
+                <tr>
+                    <th>1LD</th>
+                    <th>2LD</th>
+                    <th>3LD</th>
+                    <th>4LD</th>
+                    <th>5LD</th>
+                    <th>6LD</th>
+                    <th>7LD</th>
+                    <th>8LD</th >
+                </tr>
+            </thead>
+                <tbody id="lista-dentadura4"></tbody>
+        </table>
+
+        <div id="editarUser" class="user-form">
+            <!-- Contenido del formulario de edición de usuario -->
+        </div>
+    </div>
+
+    <script>
+        $(function () {
+            $("#navbar-placeholder").load("BarraDeNavegacion.html");
+        });
+
+        document.addEventListener("DOMContentLoaded", function () {
+            controlDentadura.mostrarDentadura(true);
+        });
+    </script>
+</body>
+</html>

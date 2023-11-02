@@ -1,0 +1,51 @@
+.contentmed{
+  width: 100%;
+}
+.medicamento{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #ffffff;
+    border-radius: 10px;
+    height: 100%;
+    padding: 10px;
+}
+.medicamento-body{
+    background-color: #fff1d8;
+    margin: auto;
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+}
+.medicamento-img{
+    margin: auto;
+}
+
+.medicamento-img img{
+  border-radius: 10px;
+  max-height: 120px;
+}
+.medicamento-header{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+}
+
+.btnDescripcion{
+    background-color: #d5ffb3;
+    color: #323130;
+    border-radius: 5px;
+}
+.btnDescripcion:hover {
+    background-color: #87cd4e;
+    color: white; /* Cambia el color de fondo al pasar el mouse por encima */
+  }
+  
+  .btnDescripcion:active {
+    background-color: #314d1a; /* Cambia el color de fondo al presionar el botón */
+  }
+  .Descripcion{
+    margin: auto;
+  }
+  

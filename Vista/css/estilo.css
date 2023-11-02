@@ -1,0 +1,96 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+  background-color: #f2f2f2;
+}
+
+h1 {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px;
+  text-align: center;
+}
+
+form {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
+  margin-top: 20px;
+}
+
+label,
+select {
+  display: block;
+  margin-bottom: 10px;
+}
+
+label {
+  font-weight: bold;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+}
+
+th,
+td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: center;
+}
+
+th {
+  background-color: #007bff;
+  color: #fff;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  margin-bottom: 5px;
+}
+
+button {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+#citasPorDia {
+  margin: 20px 0;
+}
+
+#citasPorDia h2 {
+  background-color: #17a2b8;
+  color: #fff;
+  padding: 10px;
+}
+
+#citasPorDia ul {
+  list-style: none;
+  padding: 0;
+}
+
+#citasPorDia li {
+  margin-bottom: 5px;
+}
+
+td.available {
+  background-color: white;
+}
+
+td.unavailable {
+  background-color: red;
+}
