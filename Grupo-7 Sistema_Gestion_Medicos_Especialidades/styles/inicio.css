@@ -47,10 +47,14 @@ main {
   align-items: center;
 }
 
+form {
+  margin: 20px;
+}
+
 input {
   display: flex;
   flex-wrap: wrap;
-  width: 1150px;
+  width: 450px;
   max-width: 1220px;
   border-radius: 10px;
   border: none;
@@ -64,10 +68,32 @@ input {
   font-family: inherit;
 }
 
+#descripcion {
+  width: 450px;
+  height: 250px;
+}
+
 input:hover {
   transition: 0.5s;
   background-color: #E0E0E0;
 }
+
+.form-enviar {
+  background-color: #83ADFF;
+  color: #FFF;
+  border: none;
+  border-radius: 10px;
+  padding: 0.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  outline: none;
+}
+
+.form-enviar:hover {
+  transition: 0.5s;
+  background-color: #5C8FFF;
+}
+
 
 .cards {
   display: flex;
