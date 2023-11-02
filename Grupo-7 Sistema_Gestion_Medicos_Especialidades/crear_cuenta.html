@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="./styles/crear_cuenta.css" />
     <script src="./Admin/usuario.js"></script>
     <script src="./class/medico.js"></script>
-    
+
     <title>Document</title>
 </head>
 
@@ -40,7 +40,7 @@
             </label>
             <br><br>
             <label for="clave"> Clave </label>
-            <input type="email" name="clave" id="clave" placeholder="Correo">
+            <input type="password" name="clave" id="clave" placeholder="password">
             </label>
             <br><br>
             <hr>
@@ -61,16 +61,16 @@
                 </label>
                 <br><br>
                 <label for="ciudad">Ubicación</label> <br>
-                    <select name="ciudad" id="ciudad">
-                        <option value="cbba">Cochabamba</option>
-                        <option value="scz">Santa Cruz</option>
-                        <option value="lpz">La Paz</option>
-                        <option value="or">Oruro</option>
-                        <option value="pt">Potosi</option>
-                        <option value="tj">Tarija</option>
-                        <option value="bn">Beni</option>
-                        <option value="pn">Pando</option>
-                    </select>
+                <select name="ciudad" id="ciudad">
+                    <option value="cbba">Cochabamba</option>
+                    <option value="scz">Santa Cruz</option>
+                    <option value="lpz">La Paz</option>
+                    <option value="or">Oruro</option>
+                    <option value="pt">Potosi</option>
+                    <option value="tj">Tarija</option>
+                    <option value="bn">Beni</option>
+                    <option value="pn">Pando</option>
+                </select>
                 </label>
                 <br><br>
                 <label for="mensaje"> Descripción</label> <br>
@@ -95,7 +95,6 @@
     <script>
         const select = document.getElementById('tipoUsuario');
         const camposMedico = document.getElementById('camposMedico');
-
         select.addEventListener('change', () => {
             if (select.value === 'medico') {
                 camposMedico.style.display = 'block';
@@ -106,27 +105,56 @@
 
         const form = document.getElementById('crear_cuenta_form');
 
-        function crearusuario(){
+        function crearusuario() {
             const formulario = new FormData(form);
             const datos = Object.fromEntries(formulario.entries())
             const tipo = select.value;
             if (tipo === 'normal') {
-                crearUsuario(datos);
+                crearUsuario(datos)
+
             } else if (tipo === 'medico') {
-                crearMedico(datos);
+                crearMedico(datos)
+
+
             }
             function crearUsuario(datos) {
-                console.log('Creando usuario con datos:', datos);
+                console.log('Creando usuario con datos:', datos , );
+                let nuevoUsuario = new Usuario(
+                    datos.id,
+                    datos.nombre,
+                    datos.cuenta,
+                    datos.clave,
+                    datos.email,
+                    'usuario'
+                );
+                controlUsuario.adicionar_Usuario(nuevoUsuario);
+                console.log(controlUsuario)
             }
             function crearMedico(datos) {
-
                 console.log('Creando médico con datos:', datos);
+                let nuevoMedico = new Medico(
+                    datos.id,
+                    datos.foto,
+                    datos.nombre,
+                    datos.apellido,
+                    datos.telefono,
+                    datos.email,
+                    datos.clave,
+                    datos.descripcion,
+                    datos.educacion,
+                    datos.direccion,
+                    datos.hr_disponible,
+                    datos.especialidad
+                );
+                
+                controlMedico.adicionar_Medico(nuevoMedico);
+                console.log(controlMedico)
             }
-
+            
         }
-        
 
-       
+
+
 
 
     </script>
