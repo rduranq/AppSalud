@@ -35,10 +35,12 @@
     </div>
 
     <script>
+
       var lista_usuarios = controlUsuario.obtenerListaUsuarios();
       var lista_especialidad = controlEspecialidad.obtenerListaEspecialidad();
-     
       var lista_medicos = controlMedico.obtenerListaMedicos();
+
+
 
 
       var container = document.getElementById("container");
@@ -69,10 +71,10 @@
         document.getElementById("header").innerHTML = "";
         let html = `
           <header class="header2">
-          <button class="button" onclick="armar_tabla_medicos(lista_medicos, lista_especialidad)">
+          <button class="button" onclick="armar_tabla_medicos(lista_medicos)">
             Lista Medicos
           </button>
-          <button class="button" onclick="mostrar_formUsuario()">
+          <button class="button" onclick="mostrar_formMedico()">
             Agregar Medicos
           </button>
 
@@ -106,8 +108,6 @@
 
         document.getElementById("header").innerHTML = html;
       }
-
-
 
 
 
@@ -156,17 +156,18 @@
 
 
 
-      function armar_tabla_medicos(medicos, especialidades) {
+
+
+      function armar_tabla_medicos(medicos) {
         // var container = document.getElementById("container");
-      
-        console.log(especialidades);
+        // console.log(especialidades);
         let html =
           `<div id="tabla_usuarios">` +
           `<table>` +
           `<thead>
             <tr>  
-              <th>Fotografia</th>
               <th>ID</th>
+              <th>Fotografia</th>
               <th>Nombre</th>
               <th>Apellido</th>
               <th>Telefono</th>
@@ -176,35 +177,26 @@
             </tr>
           </thead>
           <tbody>`;
-           
+
         medicos.forEach(function (medico) {
           
-          var especialidad;
-          especialidades.forEach(function(especialidad){
-
-            if(medico.id_especialidad == especialidad.id_espc){
-              especialidad=especialidad.nombreEsp;
-              console.log(especialidad);
-            }
-
-          })
-       
-
-
+          var nombreEspecialidad = lista_especialidad.find(especialidad => especialidad.id_espc == medico.id_especialidad);
+            
+            // console.log(nombreEspecialidad.nombreEsp);
 
           html += `<tr>
-                <td><img src="../images/andres.jpg" alt=""></td>
                 <td>${medico.id}</td>
+                <td><img src="../images/${medico.foto}" alt=""></td>
                 <td>${medico.nombre}</td>
                 <td>${medico.apellido}</td>
                 <td>${medico.telefono}</td>
                 <td>${medico.email}</td>
-                <td>${especialidad} </td>
+                <td>${nombreEspecialidad.nombreEsp}</td>
                 
                 <td>
-                  <button data-action="editar" onclick="formEditmedico(${medico.id});">Editar</button>
-                  <button data-action="eliminar" onclick="controlmedico.eliminar_medico(${medico.id}); 
-                  armar_tabla_medico(lista_medicos)">Eliminar</button>
+                  <button data-action="editar" onclick="formEditMedico(${medico.id});">Editar</button>
+                  <button data-action="eliminar" onclick="controlMedico.eliminar_medico(${medico.id}); 
+                  armar_tabla_medicos(lista_medicos)">Eliminar</button>
                 </td>
               </tr>`;
         });
@@ -213,6 +205,12 @@
       </div>`;
         container.innerHTML = html;
       }
+
+
+
+
+
+
 
 
       function registrar_NuevoUsuario() {
@@ -278,6 +276,106 @@
         container.innerHTML = html_formUsuario;
       }
 
+
+      function registrar_NuevoMedico() {
+        event.preventDefault();
+        
+        var descripcionEspecialidad = "Descripcion especialidad"; 
+        var password = '12345';
+        var descripcion = 'Descripcion de los medicos';
+        var educacion = 'USFX';
+        var direccion = 'Calle Loa N#432';
+        var hr_disponible = '08:00am - 18:00pm';
+
+
+        var nv_id = lista_medicos.length - 1;
+        var nv_id_esp = lista_especialidad.length - 1;
+        // console.log(id_medico);
+
+        // const id = document.getElementById("id").value;
+        var foto = document.getElementById("foto").value;
+        var nombre = document.getElementById("nombre-medico").value;
+        var apellido = document.getElementById("apellido-medico").value;
+        var telefono = document.getElementById("telefono").value;
+        var email = document.getElementById("email-medico").value;
+        var nombEspecialidad = document.getElementById("especialidad-medico").value;
+
+        const medico = new Medico(
+          nv_id + 1,
+          foto,
+          nombre,
+          apellido,
+          telefono,
+          email,
+          password,
+          descripcion,
+          educacion,
+          direccion,
+          hr_disponible,
+          nv_id_esp + 1
+        );
+
+        const especialidad = new Especialidad(
+          nv_id_esp + 1,
+          nombEspecialidad,
+          descripcionEspecialidad
+        );
+   
+        // console.log(medico);
+
+        // controlUsuario.adicionar_Usuario(usuario);
+        controlMedico.adicionar_Medico(medico);
+        controlEspecialidad.adicionar_Especialidad(especialidad);
+        // armar_tabla_usuarios(controlUsuario.obtenerListaUsuarios());
+        armar_tabla_medicos(controlMedico.obtenerListaMedicos());
+
+        document.getElementById("formulario").reset();
+        
+      }
+
+
+
+      function mostrar_formMedico() {
+        // var container = document.getElementById('container');
+        var html_formMedico = `
+        <div class="registro-container">
+        <h2>Registro de Usuario</h2>
+        <form id="formulario">
+          <label for="foto">Fotografia:</label>
+          <input type="text" id="foto" name="nombre" required />
+
+          <label for="nombre-medico">Nombre:</label>
+          <input type="text" id="nombre-medico" name="nombre" required />
+
+          <label for="apellido-medico">Apellido:</label>
+          <input type="text" id="apellido-medico" name="cuenta" required />
+
+          <label for="telefono">Telefono:</label>
+          <input type="number" id="telefono" name="password" required />
+
+          <label for="email">Email:</label>
+          <input type="email" id="email-medico" name="email" required />
+          
+          <label for="especialidad">Especialidad:</label>
+          <input type="text" id="especialidad-medico" name="email" required />
+
+          <button type="submit" class="registro-button" onclick="registrar_NuevoMedico();">Registrar</button>
+          
+        </form>
+        </div>`;
+
+        // document.getElementById("formulario").addEventListener("submit", registrar_NuevoUsuario);
+        container.innerHTML = html_formMedico;
+      }
+
+
+
+
+
+
+
+
+
       function buscar_usuario() {
         var dato_buscar = document.getElementById("dato").value;
         var message = document.getElementById("message");
@@ -309,16 +407,22 @@
         });
       }
 
-      function formEditUsuario(id_medico) {
+
+
+
+
+
+      
+      function formEditUsuario(id_usuario) {
         var listaUsuarios = controlUsuario.obtenerListaUsuarios();
-        var usuario = listaUsuarios.find((medico) => medico.id == id_medico);
+        var usuario = listaUsuarios.find((medico) => medico.id == id_usuario);
 
         var rolmedico = usuario.rol;
 
-        if (rolmedico == "Admin") {
-          rolmedico = "Usuario";
+        if (rolmedico == "admin") {
+          rolmedico = "usuario";
         } else {
-          rolmedico = "Admin";
+          rolmedico = "admin";
         }
 
         var html_formUsuario = `
@@ -349,8 +453,13 @@
 
         container.innerHTML = html_formUsuario;
       }
-      function editarUsuario(idmedico) {
-        // console.log('idmedico');
+
+      
+
+
+
+      function editarUsuario(idUsuario) {
+        // console.log('idUsuario');
         var listaUsuarios = controlUsuario.obtenerListaUsuarios();
 
         var nombre = document.getElementById("nombre").value;
@@ -361,7 +470,7 @@
 
         console.log(nombre);
         var usuarioEncontrado = listaUsuarios.find(
-          (medico) => medico.id == idmedico
+          (medico) => medico.id == idUsuario
         );
         // console.log(usuarioEncontrado);
 
@@ -373,6 +482,99 @@
 
         armar_tabla_usuarios(listaUsuarios);
       }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      function formEditMedico(id_medico) {
+
+        // console.log('El ide es '+id_medico);
+        var listaMedicos = controlMedico.obtenerListaMedicos();
+        var listaEspecialidad = controlEspecialidad.obtenerListaEspecialidad();
+
+        var medico = listaMedicos.find((medico) => medico.id == id_medico);
+
+        // console.log(medico);
+        
+        var especialidad = listaEspecialidad.find(especialidad => especialidad.id_espc == medico.id_especialidad);
+        // console.log(especialidad.nombreEsp);
+
+        var html_formMedico = `
+        <div class="registro-container">
+        <h2>Registro de Usuario</h2>
+        <div id="formulario">
+
+          <label for="foto">Fotografia:</label>
+          <input type="text" id="foto" value="${medico.foto}" name="nombre" required />
+
+          <label for="nombre-medico">Nombre:</label>
+          <input type="text" id="nombre-medico" value="${medico.nombre}" name="nombre" required />
+
+          <label for="apellido-medico">Cuenta:</label>
+          <input type="text" id="apellido-medico" value="${medico.apellido}" name="cuenta" required />
+
+          <label for="telefono">Contraseña:</label>
+          <input type="number" id="telefono" value="${medico.telefono}" name="password" required />
+
+          <label for="email">Email:</label>
+          <input type="email" id="email-medico" value="${medico.email}" name="email" required />
+          
+          <label for="especialidad">Especialidad:</label>
+          <input type="text" id="especialidad-medico" value="${especialidad.nombreEsp}" name="email" required />
+
+          <button class="registro-button" id="btn_editar" onclick="editarMedico(${medico.id})">Actualizar</button> 
+        </div>
+        </div>`;
+
+        container.innerHTML = html_formMedico;
+      }
+
+
+      function editarMedico(idmedico) {
+        // console.log('idmedico');
+        var listaMedicos = controlMedico.obtenerListaMedicos();
+        var listaEspecialidad = controlEspecialidad.obtenerListaEspecialidad();
+
+        var foto = document.getElementById("foto").value;
+        var nombre = document.getElementById("nombre-medico").value;
+        var apellido = document.getElementById("apellido-medico").value;
+        var telefono = document.getElementById("telefono").value;
+        var email = document.getElementById("email-medico").value;
+        var nombEspecialidad = document.getElementById("especialidad-medico").value;
+
+        // console.log(nombre);
+
+        var medico = listaMedicos.find((medico) => medico.id == idmedico);
+        var especialidad = listaEspecialidad.find(especialidad => especialidad.id_espc == medico.id_especialidad);
+        console.log('el nombre es: '+especialidad.nombreEsp);
+
+        // console.log(medico);
+
+        medico.foto = foto;
+        medico.nombre = nombre;
+        medico.apellido = apellido;
+        medico.telefono = telefono;
+        medico.email = email;
+        especialidad.nombreEsp = nombEspecialidad;
+
+        armar_tabla_medicos(listaMedicos);
+      }
+
+
+
+
+
+      
     </script>
   </body>
 </html>

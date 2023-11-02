@@ -5,15 +5,23 @@
   font-family: sans-serif;
 }
 
+body{
+  background-image: url("../images/login.jpg");
+  background-repeat: no-repeat;
+  background-size: cover; /* Hace que la imagen cubra toda la pantalla */
+  background-position: center; /* Centra la imagen */
+  margin: 0; /* Elimina el margen por defecto del body */
+}
+
 .login {
   /* background: url(https://i0.wp.com/lamediatitular.com/wp-content/uploads/2023/01/villarreal-cf-v-real-madrid-cf-laliga-santander.jpg?fit=7398%2C4932&ssl=1); */
-  background: linear-gradient(#13cfb0, #c9e3e8, #2ae330);
+  /* background: linear-gradient(#13cfb0, #c9e3e8, #2ae330); */
   background-repeat: no-repeat;
   background-position: center;
   background-attachment: fixed;
   background-size: cover;
-  height: 100vh;
   display: flex;
+  height: 100vh;
   justify-content: center;
   align-items: center;
   flex-direction: column;
@@ -22,6 +30,7 @@
 
 .login h2{
   font-size: 2.5rem;
+  color: white;
 }
 
 .container::before,
