@@ -74,11 +74,11 @@ listarAnalisis(){
 
 obtenerListaAnalisis() {
   let analisis = [
-      ["1", "Ronal", "Flores","1993-11-20", "M", 76543829, "Fiebre"],
-      ["2", "Alberto", "Gonzales","1989-04-12", "M", 67890123, "Dolor de cabeza"],
-      ["3", "Melisa", "flores", "1988-3-11", "F", 67839394, "arritmia cardiaca"],
-      ["4", "Juan", "Rios","1963-12-05", "M", 78585959, "cancer pulmonar"],
-      ["5", "Armando", "Orellana","1983-07-03", "M", 7684949, "gastroenteritis"]
+      ["1", "Ramon", "Vargas","1999-10-10", "M", 60879543, "analisis de hemoglobina"],
+      ["2", "Maria", "Gonzales","2001-06-12", "F", 79867845, "Analisis de glucosa"],
+      ["3", "Ruth", "Torrez", "2000-09-11", "F", 79806528, "Analisis de lipidos"],
+      ["4", "Juan", "Juanes","1991-10-09", "M", 78585959, "Analisis de eletrolitos"],
+      ["5", "Jhonn", "Saavedra","2002-12-03", "M", 75794549, "analisis de orina"]
   ];
 
   for (let i = 0; i < analisis.length; i++) {
