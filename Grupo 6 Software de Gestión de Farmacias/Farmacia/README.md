@@ -22,3 +22,8 @@ desde donde se puede agregar un usuario con email, contraseña y su rol
 
 Las cuentas y medicamentos son almacenados en una base de datos 
 en linea llamado "FireBase" también se hace uso de React. 
+Polo Orellana Brayan Simon 
+Diego Roberto Arancibia Delgado 
+Fernández Cabrera Luigi Alejandro 
+Garcia Torricos Ismael Derick
+
