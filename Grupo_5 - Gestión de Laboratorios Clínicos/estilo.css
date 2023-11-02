@@ -1,0 +1,56 @@
+.todo{
+    border: 1px solid black;
+    margin: auto;
+    width: 980px;
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+    background-color: rgb(255, 255, 255);
+   
+}
+.header{
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+    border: 1px solid black;
+    background-color: rgba(24, 86, 145, 0.798);
+}
+
+.enlace {
+    text-decoration: none;
+    background-color: rgba(237, 195, 233, 0.716);
+    color: black;
+    padding: 7px;
+    font-size: 15px;
+    border-radius: 10px;
+    margin-bottom: 40px;
+}
+.enlace:hover {
+    background-color: rgb(223, 87, 230);
+}
+
+.content h2{
+    display: flex;
+    justify-content: center;
+}
+
+.table tr th{
+    border: 1px  solid rgb(34, 6, 79);
+    font-size: 20px;
+    color: brown;
+    background-color: bisque;
+    padding: 10px;
+} 
+
+.table tr td{
+    border: 1px  solid rgb(34, 6, 79);
+    padding: 3px;
+    font-size: 15px;
+} 
+.table tr td a{
+    text-decoration: none;
+    background-color: rgba(161, 11, 81, 0.606);
+    color: white;
+   
+    border-radius: 5px;
+}

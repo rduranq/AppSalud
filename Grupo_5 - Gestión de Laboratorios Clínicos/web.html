@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestionar Analisis</title>
+    <link rel="stylesheet" href="estilo.css">
+</head>
+
+<body>
+    <div class="todo">
+        <div class="header">
+            
+            <div ><button class="enlace" onclick="armarTabla()">Lista de analisis Realizados</button></div>
+            
+            <div><button class="enlace" onclick="añadirAnalisis()">Añadir Analisis</button></div>
+            <div><button class="enlace" onclick="buscar()">Buscar</button><input type="text" id="buscar"></div>
+        </div>
+        <br>
+        <div class="table" id="tabla1" style="display: none;">
+            <h2>Lista de Analisis realizados</h2>
+            <table class="table" id="tablaR" style="background-color: rgb(233, 233, 233);">
+            </table>
+        </div>
+        <div style="display: none;" id="frouler">
+            <strong>Llenar datos</strong><br>
+            <label for="nombre">Nombre</label><br>
+            <input type="text" id="nombre" name="nombre" required><br>
+            <label for="apellido">Apellido</label><br>
+            <input type="text" id="apellido" name="apellido" required><br>
+            <label for="fecha_nacimiento">Fecha Nacimiento</label><br>
+            <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" required><br>
+            <label for="sexo">Sexo</label><br>
+            <select id="sexo" name="sexo" required>
+            <option>M</option>
+            <option>F</option>
+            </select><br>
+            <label for="telefono">Telefono</label><br>
+            <input type="number" id="telefono" name="telefono" required><br>
+            <label for="tipoAnalisis">tipoAnalisis</label><br>
+            <input type="text" id="tipoAnalisis" name="tipoAnalisis" required><br><br>
+            <button onclick="addAnalisis()">Añadir</button>
+        </div>
+    </div><br>
+    <div style=" background-color: rgb(31, 124, 124);" id="formulario"></div>
+    <div style=" background-color: rgb(31, 124, 124);" id="formModificar"></div>
+
+    <script src="analisis.js"></script>
+    <script src="añadir.js"></script>
+    <script>
+
+        let ctr = new CtrAnalisis();
+        ctr.obtenerListaAnalisis();
+
+        console.log(ctr.obtenerListaAnalisis());
+
+        function limpiarTablas() {
+            let tablaR = document.getElementById("tablaR");
+        }
+
+        function armarTabla() {
+            var lista = ctr.listaAnalisis;
+            let fomulario = document.getElementById("frouler");
+           fomulario.style.display = "none";
+            mostrar(lista);
+        }
+
+        //armarTablaPendiente(){
+       //     var listaPendiente = ctr.lista;
+       //     mostrar(lista);
+//}
+
+        function mostrar(analisis) {
+           const tabla4 = document.getElementById("tabla1");
+           tabla4.style.display = "block";
+           
+            var tablaAnalisis = document.getElementById("tablaR");
+            var html = `
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Fecha de Nacimiento</th>
+                    <th>Sexo</th>
+                    <th>Teléfono</th>
+                    <th>Tipo de analisis</th>
+                </tr>`;
+            analisis.forEach(function (analisi) {
+                html += `
+                <tr>
+                    <td>${analisi.id}</td>
+                    <td>${analisi.nombre}</td>
+                    <td>${analisi.apellido}</td>
+                    <td>${analisi.fecha_nacimiento}</td>
+                    <td>${analisi.sexo}</td>
+                    <td>${analisi.telefono}</td>
+                    <td>${analisi.tipoAnalisis}</td>
+                    <td>
+                        <button class="enlace" onclick="eliminar(${analisi.id})">Eliminar</button>
+                        <button class="enlace" onclick="modificar(${analisi.id},'${analisi.nombre}','${analisi.apellido}','${analisi.fecha_nacimiento}','${analisi.sexo}','${analisi.telefono}','${analisi.tratamiento}')">Modificar</button>
+                    </td>
+                </tr>`;
+            });
+            tablaR.innerHTML = html;
+            
+        }
+
+        function eliminar(id) {
+            ctr.eliminar(id);
+            armarTabla();
+        }
+
+        function modificarAnalisis(id, nombre, apellido, fecha_nacimiento, sexo, telefono, tipoAnalisis) {
+            const analisis = {
+                id: id,
+                nombre: nombre,
+                apellido: apellido,
+                fecha_nacimiento: fecha_nacimiento,
+                sexo: sexo,
+                telefono: telefono,
+                tipoAnalisis: tipoAnalisis
+            };
+            console.log(analisis);
+            const formModificar = document.getElementById("formModificar");
+            let html = `
+            <strong>Modificar datos</strong><br> 
+            <label for="nombre">Nombre</label><br> 
+            <input type="text" id="nombre" name="nombre" value="${analisis.nombre}" required><br>
+            <label for="apellido">Apellido</label><br>
+            <input type="text" id="apellido" name="apellido" value="${analisis.apellido}" required><br>
+            <label for="fecha_nacimiento">Fecha Nacimiento</label><br>
+            <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" value="${analisis.fecha_nacimiento}" required><br>
+            <label for="sexo">Sexo</label><br>
+            <select id="sexo" name="sexo" required>
+            <option value="M" ${analisis.sexo == 'M' ? 'selected' : ''}>M</option>
+            <option value="F" ${analisis.sexo == 'F' ? 'selected' : ''}>F</option>
+            </select><br>
+            <label for="telefono">Telefono</label><br>
+            <input type="number" id="telefono" name="telefono" value="${analisis.telefono}" required><br><br>
+            <label for="tipoAnalisis">tipoAnalisis</label><br>
+            <input type="text" id="tipoAnalisis" name="tipoAnalisis" value="${analisis.tipoAnalisis}" required><br><br>
+            <button onclick="modificar(${analisis.id})">Modificar</button>
+            `;
+            formModificar.style.border = "1px solid black";
+            formModificar.style.width = "200px";
+            formModificar.style.textAlign = "center";
+            formModificar.style.margin = "auto";
+            formModificar.style.padding = "3px";
+
+            formModificar.innerHTML = html;
+        }
+
+        function modificar(id) {
+            const nombre = document.getElementById('nombre').value;
+            const apellido = document.getElementById('apellido').value;
+            const fecha_nacimiento = document.getElementById('fecha_nacimiento').value;
+            const sexo = document.getElementById('sexo').value;
+            const telefono = document.getElementById('telefono').value;
+            const tratamiento = document.getElementById('tipoAnalisis').value;
+
+            const analisisModificado = {
+                id: id,
+                nombre: nombre,
+                apellido: apellido,
+                fecha_nacimiento: fecha_nacimiento,
+                sexo: sexo,
+                telefono: telefono,
+                tratamiento: tratamiento
+            };
+
+            ctr.modificarAnalisis(id, analisisModificado);
+            document.getElementById("formModificar").innerHTML = "";
+            document.getElementById("formModificar").style = "";
+            armarTabla();
+        }
+
+        
+
+        function addAnalisis() {
+            const nombre = document.getElementById('nombre').value;
+            const apellido = document.getElementById('apellido').value;
+            const fecha_nacimiento = document.getElementById('fecha_nacimiento').value;
+            const sexo = document.getElementById('sexo').value;
+            const telefono = document.getElementById('telefono').value;
+            const tratamiento = document.getElementById('tipoAnalisis').value;
+
+            const newAnalisis = {
+                id: null,
+                nombre: nombre,
+                apellido: apellido,
+                fecha_nacimiento: fecha_nacimiento,
+                sexo: sexo,
+                telefono: telefono,
+                tipoAnalisis: tipoAnalisis
+            };
+
+            ctr.adicionarAnalisis(newAnalisis);
+           // document.getElementById("formulario").innerHTML = "";
+           // document.getElementById("formulario").style = "";
+            armarTabla();
+
+            console.log(newAnalisis.fecha_nacimiento);
+        }
+
+        function buscar() {
+            var lista = ctr.listaAnalisis;
+            const buscar = document.getElementById("buscar").value;
+            let analisisEncontrados = [];
+
+            lista.forEach(function (analisi) {
+                if (analisi.id == buscar || analisi.nombre == buscar || analisi.apellido == buscar|| analisi.sexo == buscar|| analisi.telefono == buscar|| analisi.tratamiento==buscar|| analisi.fecha_nacimiento == buscar) {
+                    analisisEncontrados.push(analisi);
+                }
+            });
+
+            if (analisisEncontrados.length > 0) {
+                mostrar(analisisEncontrados);
+            } else {
+                const tablaR = document.getElementById("tablaR");
+                tablaR.innerHTML = `<div>"${buscar}" no está en la lista</div>`;
+            }
+        }
+    </script>
+</body>
+
+</html>
