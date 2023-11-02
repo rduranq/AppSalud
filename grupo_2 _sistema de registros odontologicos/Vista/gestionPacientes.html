@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Pacientes</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/Styles/estilos.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="/Modelo/usuario.js"></script>
+    <script src="/Control/controlUsuario.js"></script>
+    <script src="/Styles/estilos.css"></script>
+
+</head>
+
+<body>
+
+    <!--Barra de navegacion-->
+    <div id="navbar-placeholder"></div>
+
+    <div class="title"><h1>Gestionar Pacientes</h1></div>
+   
+
+    <!-- Armando -->
+        <button class="isert-user" onclick="insetarUsuario()">Insertar Usuario</button>
+        <button class="listar" onclick="controlUsuarios.mostrarUsuarios(true)">listar</button>
+
+     
+        <div  class="but-buscar" >
+                  <label for="buscar-usuario">Ingresa el nombre o apellido a buscar:</label>
+        <input type="text" id="buscar-usuario">
+        <button type="button" onclick="buscarUsuario()">Buscar</button>
+        </div>
+    
+       
+  
+  <!-- Armando -->
+
+
+
+ <div id="insertarUser" class ="user-form"></div>
+
+    <div id="contenido" class="container">
+        <table class="modern-table">
+            <thead>
+                <tr>
+                    <th>Perfil</th>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>apellido</th>
+                    <th>edad</th>
+                    <th>Correo</th>
+                    <th>sexo</th>
+                    <th>Operaciones</th>
+                </tr>
+            </thead>
+            <tbody id="lista-usuarios"></tbody>
+        </table>
+
+   
+
+    </div>
+        <div id="editarUser" class="edit-form"></div>
+ 
+    <script>
+        $(function () {
+            $("#navbar-placeholder").load("BarraDeNavegacion.html");
+        });
+
+        document.addEventListener("DOMContentLoaded", function () {
+            controlUsuarios.mostrarUsuarios(true);
+        });
+    </script>
+    <div id ="buscar-user"></div>
+</body>
+
+</html>
