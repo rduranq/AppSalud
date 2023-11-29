@@ -1,0 +1,56 @@
+#lista {
+    text-align: center;
+    color: #3a6179;
+    margin-bottom: 20px;
+}
+
+.crearMedicamento, .editar, .eliminar {
+    background-color: #4c82af;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.crearMedicamento:hover, .editar:hover, .eliminar:hover {
+    background-color: #3a6179;
+}
+
+table {
+    width: 100%;
+    max-width: 800px;
+    border-collapse: collapse;
+    margin-top: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+    padding: 10px;
+    border: 1px solid rgb(221, 221, 221);
+    text-align: center;
+}
+
+th {
+    background-color: #4c82af;
+    color: white;
+}
+
+tr:hover {
+    background-color: #ddd;
+}
+
+a {
+    color: white;
+    text-decoration: none;
+}
+
+p {
+    color: #333;
+    text-align: center;
+}

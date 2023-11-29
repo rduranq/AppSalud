@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Historial Médico</title>
+    <link rel="stylesheet" href="/css/editarHistorial.css">
+</head>
+<body>
+    <div id="contenedor">
+        <h1>Editar Historial Médico</h1>
+        <form action="/actualizarHistorial/<%= historial.id %>" method="post">
+            <div>
+                <label for="visita_paciente">Visita de Paciente:</label>
+                <select id="visita_paciente" name="id_visita_paciente" required>
+                    <% visitas.forEach(visita => { %>
+                        <option value="<%= visita.id %>" <%= visita.id === historial.id_visita_paciente ? 'selected' : '' %>>
+                            <%= visita.nombre_paciente %> - <%= visita.fecha_visita %>
+                        </option>
+                    <% }); %>
+                </select>
+            </div>
+
+            <div>
+                <label for="detalle_medicamento">Detalle Medicamento:</label>
+                <select id="detalle_medicamento" name="id_detalle_medicamento" required>
+                    <% detalles.forEach(detalle => { %>
+                        <option value="<%= detalle.id %>" <%= detalle.id === historial.id_detalle_medicamento ? 'selected' : '' %>>
+                            <%= detalle.nombre_medicamento %>
+                        </option>
+                    <% }); %>
+                </select>
+            </div>
+
+            <div>
+                <label for="cantidad">Cantidad:</label>
+                <input type="number" id="cantidad" name="cantidad" value="<%= historial.cantidad %>" required>
+            </div>
+
+            <div>
+                <label for="dosis">Dosis:</label>
+                <input type="text" id="dosis" name="dosis" value="<%= historial.dosis %>" required>
+            </div>
+
+            <button type="submit">Actualizar Historial</button>
+        </form>
+        <button><a href="/index">Cancelar</a></button>
+    </div>
+</body>
+</html>

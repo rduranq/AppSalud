@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Pacientes</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+    <h1 id="lista">Visita de Pacientes</h1>
+    <% if (lista && lista.length> 0) { %>
+        <button class="crear" id="nuevaVisita"><a href="/crearVisita">Nuevo Visita</a></button>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Fecha Visita</th>
+                <th>Fecha Próxima Visita</th>
+                <th>Presión Arterial</th>
+                <th>Peso</th>
+                <th>Enfermedad</th>
+            </tr>
+            <% lista.forEach(visita=> { %>
+                <tr>
+                    <td>
+                        <%= visita.id %>
+                    </td>
+                    <td>
+                        <%= visita.fecha_visita %>
+                    </td>
+                    <td>
+                        <%= visita.fecha_proxima_visita %>
+                    </td>
+                    <td>
+                        <%= visita.presion_arterial %>
+                    </td>
+                    <td>
+                        <%= visita.peso %>
+                    </td>
+                    <td>
+                        <%= visita.enfermedad %>
+                    </td>
+                </tr>
+                <% }); %>
+        </table>
+        <% } else { %>
+            <p>No hay pacientes para mostrar.</p>
+            <% } %>
+
+</body>
+
+</html>

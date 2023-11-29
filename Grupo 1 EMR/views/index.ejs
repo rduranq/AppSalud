@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index</title>
+    <link rel="stylesheet" href="css/styleIndex.css">
+</head>
+
+<body>
+    <div id="cont1">
+        <div id="header">
+            <img src="imagenes/icon.png" alt="imagen" class="logo">
+            <div id="header-sec">
+                <div id="titulo"> Historial Médico de Pacientes </div>
+            </div>
+        </div>
+        <div id="cont2">
+            <div id="menu">
+                <div id="menu_titulo">
+                    Administrador
+                </div>
+                <div id="btnHistorial" class="opciones selected">Historial de Pacientes</div>
+                <div id="btnPacientes" class="opciones">Pacientes</div>
+                <div id="btnVisitas" class="opciones">Visita de Paciente</div>
+                <div id="btnMedicamentos" class="opciones">Medicinas</div>
+                <div id="btnDetallesM" class="opciones">Medicinas Detalles</div>
+                <div id="btnUsuarios" class="opciones">Usuarios</div>
+                <div class="opciones"> <a id="Logout" href="/">Logout</a>
+                </div>
+            </div>
+            <div id="contenido">
+            </div>
+        </div>
+    </div>
+    <script>
+        document.getElementById('btnUsuarios').addEventListener('click', function () {
+            fetch('/usuarios')
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById('titulo').innerText = 'Lista de Usuarios';
+                    document.getElementById('contenido').innerHTML = html;
+                })
+                .catch(error => console.error('Error:', error));
+        });
+        document.getElementById('btnVisitas').addEventListener('click', function () {
+            fetch('/visitaP')
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById('titulo').innerText = 'Visita de Paciente';
+                    document.getElementById('contenido').innerHTML = html;
+                })
+                .catch(error => console.error('Error:', error));
+        });
+
+        document.getElementById('btnHistorial').addEventListener('click', function () {
+            fetch('/historial-completo')
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById('titulo').innerText = 'Historial Médico';
+                    document.getElementById('contenido').innerHTML = html;
+                })
+                .catch(error => console.error('Error:', error));
+        });
+
+        
+        document.getElementById('btnPacientes').addEventListener('click', function () {
+            fetch('/listar-pacientes')
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById('titulo').innerText = 'Lista Pacientes';
+                    document.getElementById('contenido').innerHTML = html;
+                })
+                .catch(error => console.error('Error:', error));
+        });
+
+        document.getElementById('btnMedicamentos').addEventListener('click', function () {
+            fetch('/medicamentos')
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById('titulo').innerText = 'Lista de Medicamentos';
+                    document.getElementById('contenido').innerHTML = html;
+                })
+                .catch(error => console.error('Error:', error));
+        });
+
+        document.getElementById('btnDetallesM').addEventListener('click', function () {
+            fetch('/detalles')
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById('titulo').innerText = 'Detalle de Medicamentos';
+                    document.getElementById('contenido').innerHTML = html;
+                })
+                .catch(error => console.error('Error:', error));
+        });
+
+
+        
+    </script>
+</body>
+
+</html>

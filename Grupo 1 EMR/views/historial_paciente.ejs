@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Historial de Medicación</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <h1 id="lista">Historial de Medicación de Pacientes</h1>
+    <div id="busqueda">
+        <form action="/resultadosBusqueda" method="get">
+            <input type="text" name="nombre" placeholder="Buscar por nombre del paciente" required>
+            <button type="submit">Buscar</button>
+        </form>
+    </div>
+    <button class="crear" id="nuevoHistorial"><a href="/crearHistorialMedico">Nuevo Historial</a></button>
+    <table>
+        <thead>
+            <tr>
+                <th>Paciente</th>
+                <th>Fecha de Visita</th>
+                <th>Fecha Próxima Visita</th>
+                <th>Presión Arterial</th>
+                <th>Diagnóstico</th>
+                <th>Medicamento</th>
+                <th>Cantidad</th>
+                <th>Dosis</th>
+                <th>Operaciones</th>
+            </tr>
+        </thead>
+            <% listaHistorial.forEach(historial => { %>
+                <tr>
+                    <td><%= historial.nombre_paciente %></td>
+                    <td><%= historial.fecha_visita %></td>
+                    <td><%= historial.fecha_proxima_visita %></td>
+                    <td><%= historial.presion_arterial %></td>
+                    <td><%= historial.enfermedad %></td>
+                    <td><%= historial.nombre_medicamento %></td>
+                    <td><%= historial.cantidad %></td>
+                    <td><%= historial.dosis %></td>
+                    <td>
+                        <button><a href="/editarHistorial/<%= historial.id %>">Editar</a></button>
+                        <form action="/eliminarHistorial/<%= historial.id %>" method="post"
+                            onsubmit="return confirm('¿Estás seguro de que quieres eliminar el Historial?');">
+                            <button type="submit">Eliminar</button>
+                        </form>
+                    </td>
+                </tr>
+            <% }); %>
+    </table>
+</body>
+</html>

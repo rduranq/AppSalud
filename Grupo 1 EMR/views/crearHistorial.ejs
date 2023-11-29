@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Crear Historial Médico</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/crearHistorial.css">
+</head>
+
+<body>
+    <div class="container mt-4">
+        <h1 class="text-center mb-4">Agregar Historial Médico</h1>
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        Formulario de Historial
+                    </div>
+                    <div class="card-body">
+                        <form action="/agregarHistorialMedico" method="post">
+                            <label for="visita_paciente">Seleccionar Paciente y Fecha:</label>
+                            <select id="visita_paciente" name="id_visita_paciente" required>
+                                <% visitas.forEach(visita=> { %>
+                                    <option value="<%= visita.id %>">
+                                        <%= visita.nombre_paciente %> - <%= visita.fecha_visita %>
+                                    </option>
+                                    <% }); %>
+                            </select>
+
+                            <label for="detalle_medicamento">Seleccionar Medicamento:</label>
+                            <select id="detalle_medicamento" name="id_detalle_medicamento" required>
+                                <% detalles.forEach(detalle=> { %>
+                                    <option value="<%= detalle.id %>">
+                                        <%= detalle.nombre_medicamento %>
+                                    </option>
+                                    <% }); %>
+                            </select>
+
+                            <label for="cantidad">Cantidad:</label>
+                            <input type="number" id="cantidad" name="cantidad" required>
+
+                            <label for="dosis">Dosis:</label>
+                            <input type="text" id="dosis" name="dosis" required>
+
+                            <input type="submit" value="Agregar Historial">
+                        </form>
+                    </div>
+                </div>
+                <a href="/index" class="btn btn-secondary mt-3">Cancelar</a>
+            </div>
+            <div class="col-md-4">
+                <div class="card bg-light mb-3">
+                    <div class="card-header">
+                        Detalles de la Visita
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">Presión Arterial: <span id="presion_arterial"></span></p>
+                        <p class="card-text">Peso: <span id="peso"></span></p>
+                        <p class="card-text">Enfermedad: <span id="enfermedad"></span></p>
+                        <p class="card-text">Fecha Próxima Visita: <span id="fecha_proxima_visita"></span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap y tu script -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script>
+        document.getElementById('visita_paciente').addEventListener('change', function () {
+            var visitaId = this.value;
+
+            fetch(`/detallesVisita/${visitaId}`)
+                .then(response => response.json())
+                .then(data => {
+                    // Suponiendo que 'data' es un objeto con los detalles de la visita
+                    document.getElementById('presion_arterial').textContent = data.presion_arterial;
+                    document.getElementById('peso').textContent = data.peso;
+                    document.getElementById('enfermedad').textContent = data.enfermedad;
+                    document.getElementById('fecha_proxima_visita').textContent = data.fecha_proxima_visita;
+                })
+                .catch(error => {
+                    console.error('Error al obtener los detalles de la visita:', error);
+                });
+        });
+
+    </script>
+</body>
+
+</html>

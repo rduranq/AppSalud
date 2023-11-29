@@ -1,0 +1,133 @@
+#crearUsuario{
+    width: 250px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th,
+td {
+    padding: 10px;
+    border: 1px solid rgb(221, 221, 221);
+    text-align: center;
+}
+
+th {
+    text-align: center;
+    background-color: #4c82af;
+    color: white;
+}
+
+tr:hover {
+    background-color: #ddd;
+}
+
+button {
+    background-color: #4c82af;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+a {
+    color: #ffffff;
+    text-decoration: none;
+}
+.retorno{
+    color: black;
+}
+.retorno:hover{
+    color: #4c82af;
+}
+#contenedor {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px;
+}
+
+#contenedor h2 {
+    text-align: center;
+    color: #333;
+}
+
+#contenedor form > div {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input[type="text"], input[type="email"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.crear{
+    width: 175px;
+}
+button {
+    background-color: #4c82af;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    width: 100%;
+    font-size: 16px;
+    margin-top: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #3a6179;
+}
+
+a.retorno {
+    color: #4c82af;
+    display: inline-block;
+    margin-top: 15px;
+}
+
+a.retorno:hover {
+    color: #3a6179;
+    text-decoration: underline;
+}
+td img#iconUsuario {
+    width: 60px; 
+    height: 60px; 
+    object-fit: cover; 
+    border: 2px solid #ddd; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+    display: block; 
+    margin: 0 auto; 
+}
+
+td img#iconUsuario:hover {
+    opacity: 0.8; 
+    cursor: pointer; 
+}
+#lista{
+    font-family: Arial, sans-serif;
+    text-align: center;
+    color: #3a6179;
+}

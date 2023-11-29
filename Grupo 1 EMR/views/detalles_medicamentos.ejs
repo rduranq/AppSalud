@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalles de Medicamentos</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <h1 id="lista">Detalles de Medicamentos</h1>
+    <% if (listaDetalles && listaDetalles.length > 0) { %>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Nombre del Medicamento</th>
+                <th>Empaque</th>
+            </tr>
+            <% listaDetalles.forEach(detalle => { %>
+                <tr>
+                    <td><%= detalle.id %></td>
+                    <td><%= detalle.nombre_medicamento %></td>
+                    <td><%= detalle.empaque %></td>
+                </tr>
+            <% }); %>
+        </table>        
+    <% } else { %>
+        <p>No hay detalles de medicamentos para mostrar.</p>
+    <% } %>
+</body>
+</html>

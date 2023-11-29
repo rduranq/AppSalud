@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Medicamentos</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <h1 id="lista">Lista de Medicamentos</h1>
+    <% if (listaMedicamentos && listaMedicamentos.length > 0) { %>
+        <!--<button class="crear"><a href="">Nuevo Medicamento</a></button>-->
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Nombre del Medicamento</th>
+                <th>Operaciones</th>
+                <!--<th></th>-->
+            </tr>
+            <% listaMedicamentos.forEach(medicamento => { %>
+                <tr>
+                    <td><%= medicamento.id %></td>
+                    <td><%= medicamento.nombre_medicamento %></td>
+                    <!--<td>
+                        <button class="editar"><a href="">Editar</a></button>
+                    </td>-->
+                    <td>
+                        <form action="" method="post"
+                            onsubmit="return confirm('¿Estás seguro de que quieres eliminar este medicamento?');">
+                            <button type="submit" class="eliminar">Eliminar</button>
+                        </form>
+                    </td>
+                </tr>
+            <% }); %>
+        </table>
+    <% } else { %>
+        <p>No hay medicamentos para mostrar.</p>
+    <% } %>
+</body>
+</html>

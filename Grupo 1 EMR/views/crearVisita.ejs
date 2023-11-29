@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Crear Nuevo Paciente</title>
+    <link rel="stylesheet" href="/css/crearVisita.css">
+</head>
+<body>    
+    <div id="contenedor">
+        <h1 id="lista">Agregar Nueva Visita</h1>
+
+        <form action="/agregarVisita" method="post">
+            <div>
+                <label for="fecha_visita">Fecha Visita:</label>
+                <input type="date" id="fecha_visita" name="fecha_visita" required>
+            </div>
+            <div>
+                <label for="fecha_proxima_visita">Próxima Visita:</label>
+                <input type="date" id="fecha_proxima_visita" name="fecha_proxima_visita" required>
+            </div>
+            <div>
+                <label for="ci">Presión Arterial:</label>
+                <input type="text" id="presion_arterial" name="presion_arterial" required>
+            </div>
+            <div>
+                <label for="peso">Peso:</label>
+                <input type="number" id="peso" name="peso" required>
+            </div>
+            <div>
+                <label for="enfermedad">Enfermedad:</label>
+                <input type="text" id="enfermedad" name="enfermedad" required>
+            </div>
+            <div>
+                <label for="paciente">Paciente:</label>
+                <select id="paciente" name="paciente" required>
+                    <% listaPacientes.forEach(paciente => { %>
+                        <option value="<%= paciente.id %>"><%= paciente.nombre_paciente %></option>
+                    <% }); %>
+                </select>
+            </div>
+            
+            <button type="submit">Agregar</button>
+        </form>
+        <button><a href="/index">Regresar</a></button>
+
+    </div>
+</body>
+</html>

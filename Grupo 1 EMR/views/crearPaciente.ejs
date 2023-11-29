@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Crear Nuevo Paciente</title>
+    <link rel="stylesheet" href="/css/crear.css">
+</head>
+<body>    
+    <div id="contenedor">
+        <h1 id="lista">Crear Nuevo Paciente</h1>
+
+        <form action="/agregarPaciente" method="post">
+            <div>
+                <label for="nombre_paciente">Nombre:</label>
+                <input type="text" id="nombre_paciente" name="nombre_paciente" required>
+            </div>
+            <div>
+                <label for="direccion">Dirección:</label>
+                <input type="text" id="direccion" name="direccion" required>
+            </div>
+            <div>
+                <label for="ci">CI:</label>
+                <input type="text" id="ci" name="ci" required>
+            </div>
+            <div>
+                <label for="fecha_nacimiento">Fecha de Nacimiento:</label>
+                <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" required>
+            </div>
+            <div>
+                <label for="numero_telefono">Número de Teléfono:</label>
+                <input type="tel" id="numero_telefono" name="numero_telefono" required>
+            </div>
+            <div>
+                <label for="genero">Género:</label>
+                <select id="genero" name="genero" required>
+                    <option value="Femenino">Femenino</option>
+                    <option value="Masculino">Masculino</option>
+                </select>
+            </div>
+            
+            <button type="submit">Crear Paciente</button>
+        </form>
+        <button><a href="/index">Volver a la lista de usuarios</a></button>
+
+    </div>
+</body>
+</html>

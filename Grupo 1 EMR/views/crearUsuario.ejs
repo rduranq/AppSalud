@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Nuevo Usuario</title>
+    <link rel="stylesheet" href="/css/style.css">
+
+</head>
+<body>
+    <div id="contenedor">
+        <h2>Crear Nuevo Usuario</h2>
+        <form action="/crearUsuario" method="post">
+            <div>
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" placeholder="Nombre" required>
+            </div>
+            <div>
+                <label for="cuenta">Cuenta:</label>
+                <input type="text" id="cuenta" name="cuenta" placeholder="Cuenta" required>
+            </div>
+            <div>
+                <label for="clave">Clave:</label>
+                <input type="text" id="clave" name="clave" placeholder="Clave" required>
+            </div>
+            <div>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" placeholder="Email">
+            </div>
+            <div>
+                <label for="rol">Rol:</label>
+                <input type="text" id="rol" name="rol" placeholder="Rol">
+            </div>
+            <div>
+                <label for="estampa">Estampa:</label>
+                <input type="text" id="estampa" name="estampa" placeholder="Estampa">
+            </div>
+    
+            <button type="submit">Crear Usuario</button>
+        </form>
+        <button><a class="retorno" href="/index">Volver a la lista de usuarios</a></button>
+    </div>
+</body>
+</html>
